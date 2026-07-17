@@ -1,0 +1,56 @@
+# Virtual environments and Python tooling
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Editors and operating-system files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs and local secrets
+logs/
+*.log
+.kaggle/
+kaggle.json
+
+# Notebook state
+.ipynb_checkpoints/
+
+# Dataset files: keep directory documentation and placeholders only
+data/raw/*
+!data/raw/.gitkeep
+data/interim/*
+!data/interim/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/splits/*
+!data/splits/.gitkeep
+
+# Trained models and experiment artefacts
+models/
+artifacts/
+experiments/
+mlruns/
+wandb/
+runs/
+*.pkl
+*.pickle
+*.joblib
+*.pt
+*.pth
+*.onnx
+*.h5
+*.keras
+*.safetensors
+tensorboard/

@@ -1,0 +1,11 @@
+pandas
+numpy
+matplotlib
+scikit-learn
+scipy
+PyYAML
+tqdm
+regex
+emoji
+datasketch
+kaggle
