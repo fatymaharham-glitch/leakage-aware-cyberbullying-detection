@@ -2,7 +2,7 @@ PYTHON := .venv/bin/python
 RAW_INPUT ?= data/raw/cyberbullying_tweets.csv
 PROCESSED_INPUT ?= data/processed/experiment_ready.csv
 
-.PHONY: install audit eda prepare splits test lint
+.PHONY: install audit eda prepare splits verify-splits baseline test lint
 
 install:
 	python3.12 -m venv .venv
@@ -21,6 +21,12 @@ prepare:
 
 splits:
 	$(PYTHON) scripts/build_splits.py --input "$(PROCESSED_INPUT)"
+
+verify-splits:
+	$(PYTHON) scripts/verify_frozen_splits.py --input "$(PROCESSED_INPUT)"
+
+baseline:
+	$(PYTHON) scripts/run_tfidf_baseline.py --overwrite
 
 test:
 	$(PYTHON) -m pytest

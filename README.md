@@ -2,7 +2,10 @@
 
 ## Research overview
 
-This Master's project will compare machine-learning algorithms for classifying individual Twitter posts into cyberbullying-related categories. The repository is deliberately organised around dataset provenance, validation, exploratory analysis, duplicate control, and leakage-aware data splitting before any modelling begins.
+This repository compares machine-learning algorithms for classifying individual
+Twitter posts into cyberbullying-related categories. It is organised around
+dataset provenance, validation, exploratory analysis, duplicate control, and
+leakage-aware evaluation.
 
 ### Expected classes
 
@@ -13,9 +16,12 @@ This Master's project will compare machine-learning algorithms for classifying i
 - `other_cyberbullying`
 - `not_cyberbullying`
 
-## Current pre-IPR scope
+## Current scope
 
-Current work is limited to responsible dataset acquisition, audit, documentation, text preparation, duplicate analysis, and reproducible train/validation/test splits. No dataset is included, no models are trained, and no results are claimed in this repository.
+The repository includes responsible dataset audit, documentation, text preparation,
+duplicate control, reproducible splits, and a leakage-safe word TF-IDF baseline.
+Raw data and model artefacts are not committed. Aggregate baseline metrics are in
+`reports/model_results/tfidf_preprocessing_baseline/`.
 
 ## Important interpretation boundary
 
@@ -28,7 +34,7 @@ configs/    Reproducible paths and preprocessing assumptions
 data/       Local dataset staging area; data files are intentionally ignored by Git
 docs/       Dataset provenance, methodology, and IPR-progress notes
 reports/    Generated figures and tables
-scripts/    Safe command-line entry points for the pre-IPR workflow
+scripts/    Safe command-line entry points for data and experiment workflows
 src/        Reusable validation, preprocessing, deduplication, and splitting code
 tests/      Minimal checks for critical data assumptions
 ```
@@ -63,7 +69,7 @@ bash scripts/download_dataset.sh --dataset OWNER/DATASET-SLUG
 
 The script writes only to `data/raw/`; it requires an explicit Kaggle dataset identifier. Never add `kaggle.json`, raw tweets, derived data, or credentials to Git.
 
-After locating the approved source file, run the complete pre-IPR data phase with
+After locating the approved source file, run the data preparation phase with
 project-relative paths:
 
 ```bash
@@ -83,7 +89,7 @@ python scripts/build_splits.py --input data/processed/experiment_ready.csv
 4. Audit invalid labels, empty text, duplicates, conflicting labels, and near-duplicates before splitting.
 5. Exclude conflicting-label exact text groups; retain near duplicates only within one leakage-aware fold.
 6. Treat leakage-aware fold 0 as frozen final test data: no preprocessing, tuning, or feature decisions may use it.
-7. Record generated outputs and dataset findings in `docs/ipr_progress.md`; do not fabricate findings or metrics.
+7. Save experiment configurations, aggregate metrics, and manifests under `reports/model_results/`; do not fabricate findings or metrics.
 
 ## Ethical warning
 
@@ -97,6 +103,8 @@ make audit
 make eda
 make prepare
 make splits
+make verify-splits
+make baseline
 make test
 make lint
 ```

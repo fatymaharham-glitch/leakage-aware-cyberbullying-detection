@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Download an explicitly named Kaggle dataset into the ignored raw-data directory.
 set -euo pipefail
 
 usage() {
