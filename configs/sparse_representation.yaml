@@ -1,0 +1,44 @@
+input_data: data/processed/experiment_ready.csv
+fold_assignments: data/splits/leakage_aware_folds.csv
+text_column: tweet_text
+label_column: cyberbullying_type
+row_id_column: row_id
+fold_column: fold
+final_test_fold: 0
+cross_validation_folds: [1, 2, 3, 4]
+preprocessing: p1
+representations:
+  word:
+    analyzer: word
+    ngram_range: [1, 2]
+    min_df: 2
+    max_df: 0.95
+    max_features: 80000
+  character:
+    analyzer: char_wb
+    ngram_range: [3, 5]
+    min_df: 2
+    max_df: 0.95
+    max_features: 80000
+  combined:
+    word:
+      analyzer: word
+      ngram_range: [1, 2]
+      min_df: 2
+      max_df: 0.95
+      max_features: 60000
+    character:
+      analyzer: char_wb
+      ngram_range: [3, 5]
+      min_df: 2
+      max_df: 0.95
+      max_features: 60000
+models:
+  logistic_regression:
+    C: 1.0
+    max_iter: 1000
+  linear_svm:
+    C: 1.0
+    max_iter: 10000
+outputs:
+  directory: reports/model_results/sparse_representation_comparison

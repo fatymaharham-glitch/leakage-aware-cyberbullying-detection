@@ -2,7 +2,7 @@ PYTHON := .venv/bin/python
 RAW_INPUT ?= data/raw/cyberbullying_tweets.csv
 PROCESSED_INPUT ?= data/processed/experiment_ready.csv
 
-.PHONY: install audit eda prepare splits verify-splits baseline test lint
+.PHONY: install audit eda prepare splits verify-splits baseline representations classifiers test lint
 
 install:
 	python3.12 -m venv .venv
@@ -27,6 +27,12 @@ verify-splits:
 
 baseline:
 	$(PYTHON) scripts/run_tfidf_baseline.py --overwrite
+
+representations:
+	$(PYTHON) scripts/run_sparse_benchmark.py --config sparse_representation.yaml --overwrite
+
+classifiers:
+	$(PYTHON) scripts/run_sparse_benchmark.py --config classifier_benchmark.yaml --overwrite
 
 test:
 	$(PYTHON) -m pytest
