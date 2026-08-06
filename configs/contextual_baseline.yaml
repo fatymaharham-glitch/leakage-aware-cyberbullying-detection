@@ -1,0 +1,37 @@
+input_data: data/processed/experiment_ready.csv
+fold_assignments: data/splits/leakage_aware_folds.csv
+text_column: tweet_text
+label_column: cyberbullying_type
+row_id_column: row_id
+fold_column: fold
+final_test_fold: 0
+cross_validation_folds: [1, 2, 3, 4]
+preprocessing: p1
+embedding_model:
+  model_id: sentence-transformers/all-MiniLM-L6-v2
+  revision: c9745ed1d9f207416be6d2e6f8de32d1f16199bf
+  license: Apache-2.0
+  embedding_dimension: 384
+  maximum_wordpieces: 256
+  device: cpu
+  batch_size: 64
+  normalize_embeddings: true
+  trust_remote_code: false
+  local_files_only: true
+cache:
+  embeddings: data/processed/contextual_embeddings_non_final.npz
+  manifest: data/processed/contextual_embeddings_non_final_manifest.json
+  model_directory: data/processed/huggingface/sentence_transformers
+models:
+  logistic_regression_c1_balanced:
+    estimator: logistic_regression
+    C: 1.0
+    max_iter: 1000
+    class_weight: balanced
+  linear_svm_c0_5:
+    estimator: linear_svm
+    C: 0.5
+    max_iter: 10000
+    class_weight: null
+outputs:
+  directory: reports/model_results/contextual_baseline

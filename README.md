@@ -19,9 +19,10 @@ leakage-aware evaluation.
 ## Current scope
 
 The repository includes responsible dataset audit, documentation, text preparation,
-duplicate control, reproducible splits, preprocessing ablation, sparse representation
-comparison, and bounded classifier benchmarking. Raw data and model artefacts are not
-committed. Aggregate experiment evidence is under `reports/model_results/`.
+duplicate control, reproducible splits, preprocessing ablation, sparse and contextual
+baselines, class-imbalance analysis, leakage-gap analysis, and a frozen two-candidate
+shortlist. Raw data and model artefacts are not committed. Aggregate experiment evidence
+is under `reports/model_results/`. Frozen fold 0 has not been evaluated.
 
 ## Important interpretation boundary
 
@@ -107,6 +108,14 @@ make verify-splits
 make baseline
 make representations
 make classifiers
+make contextual
+make imbalance
+make leakage-gap
+make candidates
 make test
 make lint
 ```
+
+`make contextual` reuses the locally cached, revision-pinned sentence-transformer model.
+It runs offline and fails closed if the cache or its manifest does not match. P8 candidates
+are frozen in `configs/final_candidates.yaml`; they are not final-test winners.

@@ -1,0 +1,55 @@
+{
+  "cache_reused": true,
+  "config_file": "contextual_baseline.yaml",
+  "contains_predictions": false,
+  "contains_raw_tweet_text": false,
+  "cross_validation_folds": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "embedding_model": {
+    "batch_size": 64,
+    "device": "cpu",
+    "embedding_dimension": 384,
+    "license": "Apache-2.0",
+    "local_files_only": true,
+    "maximum_wordpieces": 256,
+    "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "normalize_embeddings": true,
+    "revision": "c9745ed1d9f207416be6d2e6f8de32d1f16199bf",
+    "trust_remote_code": false
+  },
+  "embedding_seconds": 54.369088875013404,
+  "evaluated_rows": 35060,
+  "final_test_fold": 0,
+  "fold_assignments": "data/splits/leakage_aware_folds.csv",
+  "fold_assignments_sha256": "406f240c9adbbec0a4fa95bade2ba8b3ffbf3432cb8fb1e83c3b918347349dd4",
+  "input_data": "data/processed/experiment_ready.csv",
+  "input_sha256": "f203129d7c5f761471ab084cd6acac1b16f2039182e1d654a25290b7681af907",
+  "models": {
+    "linear_svm_c0_5": {
+      "C": 0.5,
+      "class_weight": null,
+      "estimator": "linear_svm",
+      "max_iter": 10000
+    },
+    "logistic_regression_c1_balanced": {
+      "C": 1.0,
+      "class_weight": "balanced",
+      "estimator": "logistic_regression",
+      "max_iter": 1000
+    }
+  },
+  "row_order_sha256": "393d4eb423f20a1f04f992b9d43326f96995fd49b4f408797253bd3c17e0854f",
+  "versions": {
+    "numpy": "2.5.1",
+    "pandas": "3.0.3",
+    "python": "3.12.13",
+    "scikit_learn": "1.9.0",
+    "sentence_transformers": "5.6.0",
+    "torch": "2.13.0",
+    "transformers": "5.14.1"
+  }
+}

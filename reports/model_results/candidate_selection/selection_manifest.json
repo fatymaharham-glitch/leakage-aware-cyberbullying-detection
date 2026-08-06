@@ -1,0 +1,20 @@
+{
+  "contains_predictions": false,
+  "contains_raw_tweet_text": false,
+  "evidence_sha256": {
+    "reports/model_results/classifier_benchmark/summary_metrics.csv": "37c790996c35566ddcba57f99f308a7c9a84920c23e482a3164917d685e2e662",
+    "reports/model_results/contextual_baseline/summary_metrics.csv": "adfd3753c8d66d3d37f8efd9ad81c96f7a25a4ec388dbc101131577bfd974413",
+    "reports/model_results/imbalance_analysis/summary_metrics.csv": "07d364dba280bd5aef0f7bd17e665792f3ecddbe1ff29fc0acec312af58a9d3f",
+    "reports/model_results/leakage_gap/credibility_gap.csv": "2ab92ea0090b8e60b71fa5cbd3e2fadccf293c870bb5b50551edf7bde65ca3e5"
+  },
+  "final_test_evaluated": false,
+  "final_test_fold": 0,
+  "frozen_candidates_config": "configs/final_candidates.yaml",
+  "frozen_candidates_sha256": "615dfd9c82bd9e52e8ed3a099edf9dffac70cade469d0fd180a5bbf0079055cd",
+  "random_minus_grouped_macro_f1": 0.0011712310781084,
+  "selected_candidate_ids": [
+    "primary_sparse_logistic_regression",
+    "secondary_sparse_linear_svm"
+  ],
+  "selection_macro_f1_tolerance": 0.005
+}

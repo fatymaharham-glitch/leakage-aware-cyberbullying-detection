@@ -15,6 +15,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import (
+    accuracy_score,
     balanced_accuracy_score,
     confusion_matrix,
     f1_score,
@@ -146,6 +147,23 @@ def _validate_labels(frame: pd.DataFrame, label_column: str, expected_labels: li
         raise ExperimentError(f"Input data contain unexpected labels: {', '.join(unknown_labels)}")
 
 
+def random_oversample_indices(labels: pd.Series, *, random_seed: int) -> np.ndarray:
+    """Return deterministic indices that balance classes by duplicating training rows only."""
+    values = labels.astype(str).to_numpy()
+    classes, counts = np.unique(values, return_counts=True)
+    if len(classes) < 2 or np.any(counts == 0):
+        raise ExperimentError("Random oversampling requires at least two non-empty classes.")
+    target_count = int(counts.max())
+    rng = np.random.default_rng(random_seed)
+    sampled: list[np.ndarray] = []
+    for label, count in zip(classes, counts, strict=True):
+        class_indices = np.flatnonzero(values == label)
+        extra = rng.choice(class_indices, size=target_count - int(count), replace=True)
+        sampled.append(np.concatenate([class_indices, extra]))
+    combined = np.concatenate(sampled)
+    return rng.permutation(combined)
+
+
 def run_sparse_benchmark(
     frame: pd.DataFrame,
     assignments: pd.DataFrame,
@@ -198,7 +216,13 @@ def run_sparse_benchmark(
                 )
                 model = build_model(model_name, model_config, random_seed)
                 estimator_name = model_config.get("estimator", model_name)
+                oversampling = model_config.get("oversampling")
+                if oversampling not in {None, "random"}:
+                    raise ExperimentError(f"Unsupported oversampling method: {oversampling}")
+                if oversampling and estimator_name == "xgboost":
+                    raise ExperimentError("Oversampling is not supported for XGBoost in this benchmark.")
                 started = perf_counter()
+                probabilities = None
                 if estimator_name == "xgboost":
                     train_features = representation.fit_transform(train[text_column])
                     validation_features = representation.transform(validation[text_column])
@@ -213,12 +237,48 @@ def run_sparse_benchmark(
                     if np.any((prediction_indices < 0) | (prediction_indices >= len(expected_labels))):
                         raise ExperimentError("XGBoost returned an unknown class index.")
                     predictions = np.asarray(expected_labels, dtype=object)[prediction_indices]
+                    probabilities = np.asarray(
+                        model.predict_proba(validation_features), dtype=float
+                    )
+                    fitted_train_rows = len(train)
+                elif oversampling == "random":
+                    train_features = representation.fit_transform(train[text_column])
+                    validation_features = representation.transform(validation[text_column])
+                    sampled_indices = random_oversample_indices(
+                        train[label_column], random_seed=random_seed + int(fold)
+                    )
+                    model.fit(
+                        train_features[sampled_indices],
+                        train[label_column].to_numpy()[sampled_indices],
+                    )
+                    predictions = model.predict(validation_features)
+                    raw_probabilities = np.asarray(
+                        model.predict_proba(validation_features), dtype=float
+                    )
+                    class_positions = {
+                        str(label): index for index, label in enumerate(model.classes_)
+                    }
+                    probabilities = raw_probabilities[
+                        :, [class_positions[label] for label in expected_labels]
+                    ]
+                    fitted_train_rows = len(sampled_indices)
                 else:
                     pipeline = Pipeline([("representation", representation), ("model", model)])
                     pipeline.fit(train[text_column], train[label_column])
                     predictions = pipeline.predict(validation[text_column])
+                    if hasattr(pipeline, "predict_proba"):
+                        raw_probabilities = np.asarray(
+                            pipeline.predict_proba(validation[text_column]), dtype=float
+                        )
+                        class_positions = {
+                            str(label): index for index, label in enumerate(pipeline.classes_)
+                        }
+                        probabilities = raw_probabilities[
+                            :, [class_positions[label] for label in expected_labels]
+                        ]
                     train_features = representation.transform(train[text_column])
                     validation_features = representation.transform(validation[text_column])
+                    fitted_train_rows = len(train)
                 elapsed = perf_counter() - started
 
                 precision, recall, f1, support = precision_recall_fscore_support(
@@ -231,6 +291,26 @@ def run_sparse_benchmark(
                     "train_rows": int(len(train)),
                     "validation_rows": int(len(validation)),
                 }
+                probability_metrics = {"log_loss": np.nan, "multiclass_brier": np.nan}
+                if probabilities is not None:
+                    validation_indices = validation[label_column].map(label_to_index).to_numpy()
+                    targets = np.eye(len(expected_labels))[validation_indices]
+                    probability_metrics = {
+                        "log_loss": float(
+                            -np.mean(
+                                np.log(
+                                    np.clip(
+                                        probabilities[np.arange(len(validation)), validation_indices],
+                                        1e-15,
+                                        1.0,
+                                    )
+                                )
+                            )
+                        ),
+                        "multiclass_brier": float(
+                            np.mean(np.sum((probabilities - targets) ** 2, axis=1))
+                        ),
+                    }
                 fold_rows.append(
                     {
                         **common,
@@ -247,12 +327,15 @@ def run_sparse_benchmark(
                             balanced_accuracy_score(validation[label_column], predictions)
                         ),
                         "mcc": float(matthews_corrcoef(validation[label_column], predictions)),
+                        "accuracy": float(accuracy_score(validation[label_column], predictions)),
+                        **probability_metrics,
                     }
                 )
                 runtime_rows.append(
                     {
                         **common,
                         "elapsed_seconds": float(elapsed),
+                        "fitted_train_rows": int(fitted_train_rows),
                         "feature_count": _feature_count(representation),
                         "train_matrix_mib": _sparse_mebibytes(train_features),
                         "validation_matrix_mib": _sparse_mebibytes(validation_features),
@@ -307,6 +390,10 @@ def run_sparse_benchmark(
             balanced_accuracy_std=("balanced_accuracy", "std"),
             mcc_mean=("mcc", "mean"),
             mcc_std=("mcc", "std"),
+            accuracy_mean=("accuracy", "mean"),
+            accuracy_std=("accuracy", "std"),
+            log_loss_mean=("log_loss", "mean"),
+            multiclass_brier_mean=("multiclass_brier", "mean"),
         )
         .sort_values(
             ["macro_f1_mean", "representation", "model"],
@@ -345,7 +432,12 @@ def _save_figure(figure: plt.Figure, output_path: Path) -> None:
         plt.close(figure)
 
 
-def write_summary_plot(summary: pd.DataFrame, output_path: Path) -> None:
+def write_summary_plot(
+    summary: pd.DataFrame,
+    output_path: Path,
+    *,
+    title: str = "Leakage-safe sparse benchmark",
+) -> None:
     """Save an aggregate, text-free macro-F1 comparison plot."""
     labels = [f"{row.representation}\n{row.model}" for row in summary.itertuples()]
     if len(summary) > 8:
@@ -374,7 +466,7 @@ def write_summary_plot(summary: pd.DataFrame, output_path: Path) -> None:
         axis.set_ylim(0, 1)
         axis.set_ylabel("Mean macro-F1")
         axis.tick_params(axis="x", rotation=35)
-    axis.set_title("Leakage-safe sparse benchmark")
+    axis.set_title(title)
     _save_figure(figure, output_path)
 
 
@@ -434,16 +526,43 @@ def build_selection_record(
             candidates = family_rows.loc[family_rows["estimator"] == estimator]
             if not candidates.empty:
                 linear_shortlist.append(candidates.iloc[0]["model"])
-        lines.extend(
-            [
-                "## Week 6 shortlist",
-                "",
-                f"Retain **{linear_shortlist[0]}** as primary and **{linear_shortlist[1]}** "
-                "as the faster linear comparator. Keep XGBoost only as a non-linear benchmark; "
-                "its grouped macro-F1 is lower and its runtime is materially higher.",
-                "",
-            ]
-        )
+        if len(linear_shortlist) >= 2:
+            lines.extend(
+                [
+                    "## Week 6 shortlist",
+                    "",
+                    f"Retain **{linear_shortlist[0]}** as primary and **{linear_shortlist[1]}** "
+                    "as the faster linear comparator. Keep XGBoost only as a non-linear benchmark; "
+                    "its grouped macro-F1 is lower and its runtime is materially higher.",
+                    "",
+                ]
+            )
+        else:
+            calibration_text = "Probability-quality metrics were unavailable."
+            if {"log_loss_mean", "multiclass_brier_mean"}.issubset(summary.columns):
+                best_log_loss = summary.sort_values("log_loss_mean").iloc[0]
+                best_brier = summary.sort_values("multiclass_brier_mean").iloc[0]
+                calibration_text = (
+                    f"For the retained treatment, validation log loss was "
+                    f"{winner['log_loss_mean']:.4f} and multiclass Brier score was "
+                    f"{winner['multiclass_brier_mean']:.4f} (lower is better). Lowest log loss was "
+                    f"{best_log_loss['log_loss_mean']:.4f} ({best_log_loss['model']}); lowest Brier "
+                    f"was {best_brier['multiclass_brier_mean']:.4f} ({best_brier['model']}). "
+                    "These small mixed differences do not justify changing the macro-F1 decision. Full calibration "
+                    "and confidence-threshold selection remain P11 work."
+                )
+            lines.extend(
+                [
+                    "## Class-imbalance decision",
+                    "",
+                    f"Retain **{winner['model']}** from the bounded weighting and random-oversampling "
+                    "comparison. Random oversampling was applied only after each training-fold split. "
+                    "Confidence-threshold selection is deferred to P11 calibration to avoid tuning "
+                    "and judging thresholds on the same validation observations.",
+                    calibration_text,
+                    "",
+                ]
+            )
         if {
             "logistic_regression_c1",
             "logistic_regression_c1_balanced",

@@ -10,6 +10,7 @@ from cyberbullying_detection.experiments.sparse_benchmark import (
     SparseBenchmarkResults,
     build_model,
     build_representation,
+    random_oversample_indices,
     run_sparse_benchmark,
 )
 from cyberbullying_detection.experiments.tfidf_baseline import ExperimentError
@@ -77,6 +78,8 @@ def test_sparse_benchmark_excludes_frozen_fold_from_vectorizer_fit(monkeypatch) 
     assert len(results.confusion_matrices) == 2 * 2 * 2
     assert results.confusion_matrices["count"].sum() == 4
     assert set(results.per_class_summary["label"]) == {"age", "gender"}
+    assert results.fold_metrics["log_loss"].notna().all()
+    assert results.fold_metrics["multiclass_brier"].notna().all()
     assert (results.runtime_metrics["train_matrix_mib"] > 0).all()
     assert all("frozenmarker" not in representation.vocabulary_ for representation in fitted_representations)
 
@@ -157,3 +160,50 @@ def test_sparse_benchmark_rejects_unknown_labels() -> None:
             expected_labels=["age", "gender"],
             random_seed=42,
         )
+
+
+def test_random_oversampling_is_balanced_and_deterministic() -> None:
+    labels = pd.Series(["age", "age", "age", "gender"])
+
+    first = random_oversample_indices(labels, random_seed=42)
+    second = random_oversample_indices(labels, random_seed=42)
+
+    assert first.tolist() == second.tolist()
+    assert labels.iloc[first].value_counts().to_dict() == {"age": 3, "gender": 3}
+
+
+def test_random_oversampling_applies_only_after_fold_split() -> None:
+    frame, assignments = _synthetic_inputs()
+    results = run_sparse_benchmark(
+        frame,
+        assignments,
+        text_column="tweet_text",
+        label_column="cyberbullying_type",
+        row_id_column="row_id",
+        fold_column="fold",
+        final_test_fold=0,
+        validation_folds=[1, 2],
+        preprocessing="p1",
+        representations={
+            "word": {
+                "analyzer": "word",
+                "ngram_range": [1, 1],
+                "min_df": 1,
+                "max_df": 1.0,
+                "max_features": 100,
+            }
+        },
+        models={
+            "oversampled": {
+                "estimator": "logistic_regression",
+                "C": 1.0,
+                "max_iter": 100,
+                "oversampling": "random",
+            }
+        },
+        expected_labels=["age", "gender"],
+        random_seed=42,
+    )
+
+    assert set(results.fold_metrics["validation_rows"]) == {2}
+    assert set(results.runtime_metrics["fitted_train_rows"]) == {2}
