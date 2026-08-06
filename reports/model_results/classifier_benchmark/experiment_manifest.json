@@ -1,0 +1,123 @@
+{
+  "config_file": "classifier_benchmark.yaml",
+  "config_sha256": "69bdb27a0c9c6bb758e9fc0799e3a563b11085438b47c2846340320df4167348",
+  "contains_predictions": false,
+  "contains_raw_tweet_text": false,
+  "cross_validation_folds": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "final_test_fold": 0,
+  "fold_assignments": "data/splits/leakage_aware_folds.csv",
+  "fold_assignments_sha256": "406f240c9adbbec0a4fa95bade2ba8b3ffbf3432cb8fb1e83c3b918347349dd4",
+  "input_data": "data/processed/experiment_ready.csv",
+  "input_sha256": "f203129d7c5f761471ab084cd6acac1b16f2039182e1d654a25290b7681af907",
+  "models": {
+    "linear_svm_c0_5": {
+      "C": 0.5,
+      "class_weight": null,
+      "estimator": "linear_svm",
+      "max_iter": 10000
+    },
+    "linear_svm_c1": {
+      "C": 1.0,
+      "class_weight": null,
+      "estimator": "linear_svm",
+      "max_iter": 10000
+    },
+    "linear_svm_c1_balanced": {
+      "C": 1.0,
+      "class_weight": "balanced",
+      "estimator": "linear_svm",
+      "max_iter": 10000
+    },
+    "linear_svm_c2": {
+      "C": 2.0,
+      "class_weight": null,
+      "estimator": "linear_svm",
+      "max_iter": 10000
+    },
+    "logistic_regression_c0_5": {
+      "C": 0.5,
+      "class_weight": null,
+      "estimator": "logistic_regression",
+      "max_iter": 1000
+    },
+    "logistic_regression_c1": {
+      "C": 1.0,
+      "class_weight": null,
+      "estimator": "logistic_regression",
+      "max_iter": 1000
+    },
+    "logistic_regression_c1_balanced": {
+      "C": 1.0,
+      "class_weight": "balanced",
+      "estimator": "logistic_regression",
+      "max_iter": 1000
+    },
+    "logistic_regression_c2": {
+      "C": 2.0,
+      "class_weight": null,
+      "estimator": "logistic_regression",
+      "max_iter": 1000
+    },
+    "multinomial_nb": {
+      "alpha": 1.0,
+      "estimator": "multinomial_nb"
+    },
+    "random_forest": {
+      "class_weight": null,
+      "estimator": "random_forest",
+      "max_depth": 30,
+      "max_features": "sqrt",
+      "n_estimators": 75,
+      "n_jobs": 4
+    },
+    "xgboost": {
+      "colsample_bytree": 0.5,
+      "estimator": "xgboost",
+      "learning_rate": 0.1,
+      "max_depth": 6,
+      "n_estimators": 100,
+      "n_jobs": 4,
+      "subsample": 0.8
+    }
+  },
+  "preprocessing": "p1",
+  "random_seed": 42,
+  "representations": {
+    "combined": {
+      "character": {
+        "analyzer": "char_wb",
+        "max_df": 0.95,
+        "max_features": 60000,
+        "min_df": 2,
+        "ngram_range": [
+          3,
+          5
+        ]
+      },
+      "word": {
+        "analyzer": "word",
+        "max_df": 0.95,
+        "max_features": 60000,
+        "min_df": 2,
+        "ngram_range": [
+          1,
+          2
+        ]
+      }
+    }
+  },
+  "versions": {
+    "numpy": "2.5.1",
+    "pandas": "3.0.3",
+    "python": "3.12.13",
+    "pyyaml": "6.0.3",
+    "scikit_learn": "1.9.0",
+    "scipy": "1.18.0",
+    "xgboost": "3.3.0"
+  }
+}

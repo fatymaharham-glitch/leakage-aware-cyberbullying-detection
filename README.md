@@ -19,9 +19,9 @@ leakage-aware evaluation.
 ## Current scope
 
 The repository includes responsible dataset audit, documentation, text preparation,
-duplicate control, reproducible splits, and a leakage-safe word TF-IDF baseline.
-Raw data and model artefacts are not committed. Aggregate baseline metrics are in
-`reports/model_results/tfidf_preprocessing_baseline/`.
+duplicate control, reproducible splits, preprocessing ablation, sparse representation
+comparison, and bounded classifier benchmarking. Raw data and model artefacts are not
+committed. Aggregate experiment evidence is under `reports/model_results/`.
 
 ## Important interpretation boundary
 
@@ -105,6 +105,8 @@ make prepare
 make splits
 make verify-splits
 make baseline
+make representations
+make classifiers
 make test
 make lint
 ```

@@ -40,7 +40,7 @@ data/splits/*
 # Trained models and experiment artefacts
 models/
 artifacts/
-experiments/
+/experiments/
 mlruns/
 wandb/
 runs/
