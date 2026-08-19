@@ -136,6 +136,9 @@ def build_project_dashboard() -> dict[str, Any]:
             "why": item["question"],
             "settings": item["choices_tried"],
             "approach": item["solution"],
+            "details": item["results"],
+            "limitations": item["limitations"],
+            "metadata": item["metadata"],
         }
         for item in experiment_data
     ]
