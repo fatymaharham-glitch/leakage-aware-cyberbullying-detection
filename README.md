@@ -83,19 +83,4 @@ demo/           FastAPI app, dashboard, five model pipelines, checksum registry
 experiments/    shared logic plus five four-file experiment folders
 Makefile        install, five experiments, all, demo
 requirements.txt pinned direct dependencies
-PRESENTATION_GUIDE.md beginner speaking guide and honest limitations
 ```
-
-Earlier duplicate research structures were consolidated into these experiment records. There is intentionally no retained pytest suite.
-
-## Known limitations
-
-- Main dataset licence/version/redistribution permission is unknown.
-- Raw labels may contain annotation ambiguity even after conflict controls.
-- Individual tweets omit conversational and social context.
-- Obfuscated spelling, especially leetspeak and masking, reduces performance.
-- External false positives show domain shift.
-- Identity probes are diagnostics, not a complete fairness audit.
-- Human qualitative error coding remains optional and was not performed.
-
-See `PRESENTATION_GUIDE.md` for the beginner presentation narrative.
