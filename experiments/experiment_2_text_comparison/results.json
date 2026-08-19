@@ -1,0 +1,3809 @@
+{
+  "choices_tried": {
+    "classifiers": [
+      "Logistic Regression C=1",
+      "Linear SVM C=1"
+    ],
+    "preprocessing": [
+      "P0 minimal",
+      "P1 social-media-aware",
+      "P2 aggressive"
+    ],
+    "representations": [
+      "word TF-IDF",
+      "character TF-IDF",
+      "combined word + character TF-IDF"
+    ]
+  },
+  "experiment": 2,
+  "limitations": [
+    "English stop words and the source dataset language mix may disadvantage non-English text.",
+    "Vocabulary sizes are bounded; larger searches were deliberately not performed after seeing the protected test."
+  ],
+  "metadata": {
+    "class_order": [
+      "age",
+      "ethnicity",
+      "gender",
+      "religion",
+      "other_cyberbullying",
+      "not_cyberbullying"
+    ],
+    "development_folds": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "evidence_source": "fresh_reproduction",
+    "final_test_fold": 0,
+    "fold_assignments_sha256": "406f240c9adbbec0a4fa95bade2ba8b3ffbf3432cb8fb1e83c3b918347349dd4",
+    "input_sha256": "f203129d7c5f761471ab084cd6acac1b16f2039182e1d654a25290b7681af907",
+    "random_seed": 42,
+    "versions": {
+      "joblib": "1.5.3",
+      "numpy": "2.5.1",
+      "pandas": "3.0.3",
+      "python": "3.12.13",
+      "scikit-learn": "1.9.0",
+      "scipy": "1.18.0",
+      "sentence-transformers": "5.6.0",
+      "xgboost": "3.3.0"
+    }
+  },
+  "question": "Which text cleaning and TF-IDF representation work best without touching fold 0?",
+  "results": {
+    "preprocessing": {
+      "p0__linear_svm_c1": {
+        "confusion_matrix": [
+          [
+            6248,
+            11,
+            8,
+            7,
+            53,
+            42
+          ],
+          [
+            8,
+            6215,
+            11,
+            9,
+            61,
+            32
+          ],
+          [
+            19,
+            34,
+            5195,
+            33,
+            386,
+            422
+          ],
+          [
+            5,
+            11,
+            24,
+            6124,
+            62,
+            155
+          ],
+          [
+            104,
+            93,
+            263,
+            114,
+            3444,
+            816
+          ],
+          [
+            220,
+            63,
+            257,
+            274,
+            1166,
+            3071
+          ]
+        ],
+        "folds": [
+          {
+            "accuracy": 0.8640045636052481,
+            "balanced_accuracy": 0.8498111599596897,
+            "feature_count": 73563,
+            "fit_seconds": 0.2542575839906931,
+            "fold": 1,
+            "macro_f1": 0.8486979227585535,
+            "mcc": 0.8367335826004318,
+            "predict_seconds": 0.002076667034998536,
+            "rows": 8765,
+            "total_seconds": 1.7351600000401959
+          },
+          {
+            "accuracy": 0.8589845978322875,
+            "balanced_accuracy": 0.8437171093903216,
+            "feature_count": 73673,
+            "fit_seconds": 0.26830170792527497,
+            "fold": 2,
+            "macro_f1": 0.8428441031755441,
+            "mcc": 0.830543911651085,
+            "predict_seconds": 0.0022512919967994094,
+            "rows": 8765,
+            "total_seconds": 1.7539767910493538
+          },
+          {
+            "accuracy": 0.8685681688533942,
+            "balanced_accuracy": 0.8538615745745065,
+            "feature_count": 73239,
+            "fit_seconds": 0.25524462503381073,
+            "fold": 3,
+            "macro_f1": 0.852861644211152,
+            "mcc": 0.8421029097762694,
+            "predict_seconds": 0.0020121249835938215,
+            "rows": 8765,
+            "total_seconds": 1.719329999992624
+          },
+          {
+            "accuracy": 0.865031374786081,
+            "balanced_accuracy": 0.849446966710032,
+            "feature_count": 73171,
+            "fit_seconds": 0.24841224995907396,
+            "fold": 4,
+            "macro_f1": 0.8485203927028945,
+            "mcc": 0.8377561500107489,
+            "predict_seconds": 0.0020186250330880284,
+            "rows": 8765,
+            "total_seconds": 1.865606583072804
+          }
+        ],
+        "labels": [
+          "age",
+          "ethnicity",
+          "gender",
+          "religion",
+          "other_cyberbullying",
+          "not_cyberbullying"
+        ],
+        "per_class": [
+          {
+            "class": "age",
+            "f1": 0.9590138674884437,
+            "fold": 1,
+            "precision": 0.941318814277072,
+            "recall": 0.9773869346733668,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9711236660389203,
+            "fold": 1,
+            "precision": 0.9656679151061174,
+            "recall": 0.9766414141414141,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8700680272108844,
+            "fold": 1,
+            "precision": 0.9019746121297603,
+            "recall": 0.8403416557161629,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9493514515132798,
+            "fold": 1,
+            "precision": 0.9360535931790499,
+            "recall": 0.9630325814536341,
+            "support": 1596
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.6986624704956726,
+            "fold": 1,
+            "precision": 0.6661665416354089,
+            "recall": 0.7344913151364765,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6439680538041194,
+            "fold": 1,
+            "precision": 0.6857654431512982,
+            "recall": 0.606973058637084,
+            "support": 1262
+          },
+          {
+            "class": "age",
+            "f1": 0.9622758194186766,
+            "fold": 2,
+            "precision": 0.9476248477466505,
+            "recall": 0.9773869346733668,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.968125,
+            "fold": 2,
+            "precision": 0.9585396039603961,
+            "recall": 0.9779040404040404,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8786244099797708,
+            "fold": 2,
+            "precision": 0.9023545706371191,
+            "recall": 0.8561103810775296,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9410669975186104,
+            "fold": 2,
+            "precision": 0.9312461632903621,
+            "recall": 0.9510971786833856,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.6738609112709832,
+            "fold": 2,
+            "precision": 0.6519721577726219,
+            "recall": 0.6972704714640199,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6331114808652246,
+            "fold": 2,
+            "precision": 0.6669588080631026,
+            "recall": 0.6025336500395883,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.9675023212627669,
+            "fold": 3,
+            "precision": 0.9542124542124543,
+            "recall": 0.9811676082862524,
+            "support": 1593
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9767879548306148,
+            "fold": 3,
+            "precision": 0.9706982543640897,
+            "recall": 0.9829545454545454,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8784102391377568,
+            "fold": 3,
+            "precision": 0.9011748445058743,
+            "recall": 0.8567674113009198,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9492151431209603,
+            "fold": 3,
+            "precision": 0.932285368802902,
+            "recall": 0.9667711598746082,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.6972843450479234,
+            "fold": 3,
+            "precision": 0.6736111111111112,
+            "recall": 0.722682119205298,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6479698618668899,
+            "fold": 3,
+            "precision": 0.6873889875666075,
+            "recall": 0.6128266033254157,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.9641434262948207,
+            "fold": 4,
+            "precision": 0.9413524835427888,
+            "recall": 0.9880653266331658,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9796174349325808,
+            "fold": 4,
+            "precision": 0.973208722741433,
+            "recall": 0.9861111111111112,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8808882907133243,
+            "fold": 4,
+            "precision": 0.9033816425120773,
+            "recall": 0.8594878529218647,
+            "support": 1523
+          },
+          {
+            "class": "religion",
+            "f1": 0.9458372021046115,
+            "fold": 4,
+            "precision": 0.9339853300733496,
+            "recall": 0.9579937304075236,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.6834825061025224,
+            "fold": 4,
+            "precision": 0.672,
+            "recall": 0.695364238410596,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6371534960695077,
+            "fold": 4,
+            "precision": 0.6672443674176777,
+            "recall": 0.6096595407759303,
+            "support": 1263
+          }
+        ],
+        "summary": {
+          "accuracy_mean": 0.8641471762692526,
+          "balanced_accuracy_mean": 0.8492092026586374,
+          "macro_f1_mean": 0.848231015712036,
+          "macro_f1_std": 0.0035624180062691973,
+          "mcc_mean": 0.8367841385096338,
+          "runtime_seconds": 7.0740733741549775
+        }
+      },
+      "p0__logistic_regression_c1": {
+        "confusion_matrix": [
+          [
+            6222,
+            14,
+            6,
+            15,
+            50,
+            62
+          ],
+          [
+            5,
+            6168,
+            13,
+            25,
+            80,
+            45
+          ],
+          [
+            18,
+            31,
+            5058,
+            37,
+            458,
+            487
+          ],
+          [
+            3,
+            14,
+            22,
+            6095,
+            79,
+            168
+          ],
+          [
+            101,
+            82,
+            222,
+            160,
+            3553,
+            716
+          ],
+          [
+            206,
+            57,
+            192,
+            327,
+            1197,
+            3072
+          ]
+        ],
+        "folds": [
+          {
+            "accuracy": 0.8611523103251568,
+            "balanced_accuracy": 0.8481187178430981,
+            "feature_count": 73563,
+            "fit_seconds": 2.3654773329617456,
+            "fold": 1,
+            "macro_f1": 0.8471146344191695,
+            "mcc": 0.8335615095781626,
+            "predict_seconds": 0.0019470000406727195,
+            "rows": 8765,
+            "total_seconds": 3.859197083977051
+          },
+          {
+            "accuracy": 0.8540787221905305,
+            "balanced_accuracy": 0.8396725252461329,
+            "feature_count": 73673,
+            "fit_seconds": 2.9551064170664176,
+            "fold": 2,
+            "macro_f1": 0.8390341968479388,
+            "mcc": 0.8247955581206601,
+            "predict_seconds": 0.001847042003646493,
+            "rows": 8765,
+            "total_seconds": 4.434114500065334
+          },
+          {
+            "accuracy": 0.8685681688533942,
+            "balanced_accuracy": 0.8553011823724873,
+            "feature_count": 73239,
+            "fit_seconds": 3.0880466250237077,
+            "fold": 3,
+            "macro_f1": 0.8543659966876881,
+            "mcc": 0.8422754964426845,
+            "predict_seconds": 0.001897042035125196,
+            "rows": 8765,
+            "total_seconds": 4.551807541050948
+          },
+          {
+            "accuracy": 0.8580718767826583,
+            "balanced_accuracy": 0.8432157440785435,
+            "feature_count": 73171,
+            "fit_seconds": 2.5327945419121534,
+            "fold": 4,
+            "macro_f1": 0.8420638684902765,
+            "mcc": 0.8297387004484615,
+            "predict_seconds": 0.0019286669557914138,
+            "rows": 8765,
+            "total_seconds": 4.027202959056012
+          }
+        ],
+        "labels": [
+          "age",
+          "ethnicity",
+          "gender",
+          "religion",
+          "other_cyberbullying",
+          "not_cyberbullying"
+        ],
+        "per_class": [
+          {
+            "class": "age",
+            "f1": 0.9603469640644362,
+            "fold": 1,
+            "precision": 0.9474327628361858,
+            "recall": 0.9736180904522613,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9684940138626339,
+            "fold": 1,
+            "precision": 0.9666666666666667,
+            "recall": 0.9703282828282829,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8683844011142061,
+            "fold": 1,
+            "precision": 0.9237037037037037,
+            "recall": 0.8193166885676741,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9379225568531039,
+            "fold": 1,
+            "precision": 0.9203860072376358,
+            "recall": 0.956140350877193,
+            "support": 1596
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.703076923076923,
+            "fold": 1,
+            "precision": 0.6570812365204889,
+            "recall": 0.7559966914805625,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6444629475437136,
+            "fold": 1,
+            "precision": 0.6789473684210526,
+            "recall": 0.6133122028526149,
+            "support": 1262
+          },
+          {
+            "class": "age",
+            "f1": 0.9617656201429904,
+            "fold": 2,
+            "precision": 0.952,
+            "recall": 0.9717336683417085,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9678841309823678,
+            "fold": 2,
+            "precision": 0.9654522613065326,
+            "recall": 0.9703282828282829,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8700137551581844,
+            "fold": 2,
+            "precision": 0.9126984126984127,
+            "recall": 0.831143232588699,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9293611793611793,
+            "fold": 2,
+            "precision": 0.9108970499698976,
+            "recall": 0.94858934169279,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.6766325727773407,
+            "fold": 2,
+            "precision": 0.6451612903225806,
+            "recall": 0.7113316790736146,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6285479226655697,
+            "fold": 2,
+            "precision": 0.6541095890410958,
+            "recall": 0.6049089469517023,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.9658597144630664,
+            "fold": 3,
+            "precision": 0.9551872314303254,
+            "recall": 0.9767733835530445,
+            "support": 1593
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9710691823899371,
+            "fold": 3,
+            "precision": 0.9674185463659147,
+            "recall": 0.9747474747474747,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8794520547945206,
+            "fold": 3,
+            "precision": 0.9184549356223176,
+            "recall": 0.8436268068331143,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9381884944920441,
+            "fold": 3,
+            "precision": 0.9163179916317992,
+            "recall": 0.961128526645768,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7116516280894468,
+            "fold": 3,
+            "precision": 0.6763609246830723,
+            "recall": 0.7508278145695364,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6599749058971142,
+            "fold": 3,
+            "precision": 0.699468085106383,
+            "recall": 0.6247030878859857,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.9634633097942892,
+            "fold": 4,
+            "precision": 0.9423423423423424,
+            "recall": 0.9855527638190955,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9773013871374527,
+            "fold": 4,
+            "precision": 0.9760705289672544,
+            "recall": 0.9785353535353535,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8697450034458993,
+            "fold": 4,
+            "precision": 0.9151559100797679,
+            "recall": 0.8286277084701248,
+            "support": 1523
+          },
+          {
+            "class": "religion",
+            "f1": 0.9337829552421827,
+            "fold": 4,
+            "precision": 0.913617276544691,
+            "recall": 0.954858934169279,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.68125,
+            "fold": 4,
+            "precision": 0.6449704142011834,
+            "recall": 0.7218543046357616,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6268405553218342,
+            "fold": 4,
+            "precision": 0.6687612208258528,
+            "recall": 0.5898653998416469,
+            "support": 1263
+          }
+        ],
+        "summary": {
+          "accuracy_mean": 0.8604677695379349,
+          "balanced_accuracy_mean": 0.8465770423850655,
+          "macro_f1_mean": 0.8456446741112682,
+          "macro_f1_std": 0.00580393894982316,
+          "mcc_mean": 0.8325928161474923,
+          "runtime_seconds": 16.872322084149346
+        }
+      },
+      "p1__linear_svm_c1": {
+        "confusion_matrix": [
+          [
+            6256,
+            7,
+            8,
+            6,
+            48,
+            44
+          ],
+          [
+            7,
+            6230,
+            10,
+            7,
+            53,
+            29
+          ],
+          [
+            21,
+            32,
+            5229,
+            33,
+            380,
+            394
+          ],
+          [
+            8,
+            7,
+            21,
+            6121,
+            78,
+            146
+          ],
+          [
+            94,
+            74,
+            261,
+            80,
+            3486,
+            839
+          ],
+          [
+            218,
+            56,
+            253,
+            271,
+            1181,
+            3072
+          ]
+        ],
+        "folds": [
+          {
+            "accuracy": 0.8683399885909869,
+            "balanced_accuracy": 0.8545143567639061,
+            "feature_count": 70605,
+            "fit_seconds": 0.2458032079739496,
+            "fold": 1,
+            "macro_f1": 0.8536893623217964,
+            "mcc": 0.8418989242325343,
+            "predict_seconds": 0.0020572090288624167,
+            "rows": 8765,
+            "total_seconds": 3.1871507079340518
+          },
+          {
+            "accuracy": 0.8629777524244153,
+            "balanced_accuracy": 0.8479191824312237,
+            "feature_count": 70742,
+            "fit_seconds": 0.2480734169948846,
+            "fold": 2,
+            "macro_f1": 0.8469375811608496,
+            "mcc": 0.835413616560645,
+            "predict_seconds": 0.002058541984297335,
+            "rows": 8765,
+            "total_seconds": 3.1812156660016626
+          },
+          {
+            "accuracy": 0.8717626925270964,
+            "balanced_accuracy": 0.8570917738993638,
+            "feature_count": 70450,
+            "fit_seconds": 0.2440794159192592,
+            "fold": 3,
+            "macro_f1": 0.8561711382105518,
+            "mcc": 0.8458834542364367,
+            "predict_seconds": 0.00206204189453274,
+            "rows": 8765,
+            "total_seconds": 3.1899935000110418
+          },
+          {
+            "accuracy": 0.8645750142612664,
+            "balanced_accuracy": 0.8490645819517689,
+            "feature_count": 70262,
+            "fit_seconds": 0.25699204101692885,
+            "fold": 4,
+            "macro_f1": 0.8478787560377065,
+            "mcc": 0.8373488094734253,
+            "predict_seconds": 0.0020752500277012587,
+            "rows": 8765,
+            "total_seconds": 3.199069874943234
+          }
+        ],
+        "labels": [
+          "age",
+          "ethnicity",
+          "gender",
+          "religion",
+          "other_cyberbullying",
+          "not_cyberbullying"
+        ],
+        "per_class": [
+          {
+            "class": "age",
+            "f1": 0.9650911337658326,
+            "fold": 1,
+            "precision": 0.9495440729483283,
+            "recall": 0.9811557788944724,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9739730322985262,
+            "fold": 1,
+            "precision": 0.967601246105919,
+            "recall": 0.9804292929292929,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8763661202185792,
+            "fold": 1,
+            "precision": 0.9125177809388336,
+            "recall": 0.842969776609724,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9524992238435268,
+            "fold": 1,
+            "precision": 0.944,
+            "recall": 0.9611528822055138,
+            "support": 1596
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7032359905288083,
+            "fold": 1,
+            "precision": 0.6724528301886793,
+            "recall": 0.7369727047146402,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.650970673275506,
+            "fold": 1,
+            "precision": 0.6798964624676446,
+            "recall": 0.624405705229794,
+            "support": 1262
+          },
+          {
+            "class": "age",
+            "f1": 0.9633507853403142,
+            "fold": 2,
+            "precision": 0.9450151057401812,
+            "recall": 0.9824120603015075,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9773869346733668,
+            "fold": 2,
+            "precision": 0.9725,
+            "recall": 0.9823232323232324,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8783602150537635,
+            "fold": 2,
+            "precision": 0.8988995873452544,
+            "recall": 0.8587385019710907,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9449112978524743,
+            "fold": 2,
+            "precision": 0.9381953028430161,
+            "recall": 0.9517241379310345,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.6817102137767221,
+            "fold": 2,
+            "precision": 0.6537585421412301,
+            "recall": 0.7121588089330024,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6359060402684564,
+            "fold": 2,
+            "precision": 0.6761819803746655,
+            "recall": 0.6001583531274742,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.9652820830750155,
+            "fold": 3,
+            "precision": 0.9534598897734231,
+            "recall": 0.9774011299435028,
+            "support": 1593
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9798868636077939,
+            "fold": 3,
+            "precision": 0.9755944931163955,
+            "recall": 0.9842171717171717,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8865295288652952,
+            "fold": 3,
+            "precision": 0.8954423592493298,
+            "recall": 0.8777923784494087,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9522924411400248,
+            "fold": 3,
+            "precision": 0.9412124923453766,
+            "recall": 0.9636363636363636,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7014446227929374,
+            "fold": 3,
+            "precision": 0.6806853582554517,
+            "recall": 0.7235099337748344,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6515912897822446,
+            "fold": 3,
+            "precision": 0.6915555555555556,
+            "recall": 0.615993665874901,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.9641434262948207,
+            "fold": 4,
+            "precision": 0.9413524835427888,
+            "recall": 0.9880653266331658,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9802321932852213,
+            "fold": 4,
+            "precision": 0.974422956955708,
+            "recall": 0.9861111111111112,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8824923806298679,
+            "fold": 4,
+            "precision": 0.9111888111888112,
+            "recall": 0.855548260013132,
+            "support": 1523
+          },
+          {
+            "class": "religion",
+            "f1": 0.946555452579549,
+            "fold": 4,
+            "precision": 0.9330085261875761,
+            "recall": 0.9605015673981191,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.6858054226475279,
+            "fold": 4,
+            "precision": 0.6615384615384615,
+            "recall": 0.7119205298013245,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6280436607892528,
+            "fold": 4,
+            "precision": 0.6684539767649688,
+            "recall": 0.5922406967537609,
+            "support": 1263
+          }
+        ],
+        "summary": {
+          "accuracy_mean": 0.8669138619509412,
+          "balanced_accuracy_mean": 0.8521474737615655,
+          "macro_f1_mean": 0.851169209432726,
+          "macro_f1_std": 0.0038763456843679085,
+          "mcc_mean": 0.8401362011257603,
+          "runtime_seconds": 12.75742974888999
+        }
+      },
+      "p1__logistic_regression_c1": {
+        "confusion_matrix": [
+          [
+            6246,
+            9,
+            5,
+            11,
+            50,
+            48
+          ],
+          [
+            7,
+            6198,
+            13,
+            13,
+            72,
+            33
+          ],
+          [
+            18,
+            25,
+            5107,
+            34,
+            458,
+            447
+          ],
+          [
+            3,
+            6,
+            23,
+            6102,
+            85,
+            162
+          ],
+          [
+            88,
+            67,
+            227,
+            121,
+            3598,
+            733
+          ],
+          [
+            209,
+            40,
+            198,
+            302,
+            1228,
+            3074
+          ]
+        ],
+        "folds": [
+          {
+            "accuracy": 0.8649172846548774,
+            "balanced_accuracy": 0.8520090580070301,
+            "feature_count": 70605,
+            "fit_seconds": 2.577827792032622,
+            "fold": 1,
+            "macro_f1": 0.851106590550649,
+            "mcc": 0.8381036021311834,
+            "predict_seconds": 0.0019392090616747737,
+            "rows": 8765,
+            "total_seconds": 5.512786332983524
+          },
+          {
+            "accuracy": 0.860125499144324,
+            "balanced_accuracy": 0.8463051264281981,
+            "feature_count": 70742,
+            "fit_seconds": 2.6617647919338197,
+            "fold": 2,
+            "macro_f1": 0.8453083355777896,
+            "mcc": 0.8322157474342915,
+            "predict_seconds": 0.002112208981998265,
+            "rows": 8765,
+            "total_seconds": 5.604203999973834
+          },
+          {
+            "accuracy": 0.8713063320022818,
+            "balanced_accuracy": 0.8575959463641928,
+            "feature_count": 70450,
+            "fit_seconds": 2.8459541250485927,
+            "fold": 3,
+            "macro_f1": 0.8567749472325633,
+            "mcc": 0.8455053724838792,
+            "predict_seconds": 0.001944791991263628,
+            "rows": 8765,
+            "total_seconds": 5.7635814170353115
+          },
+          {
+            "accuracy": 0.8634341129492299,
+            "balanced_accuracy": 0.8486310264954509,
+            "feature_count": 70262,
+            "fit_seconds": 2.536049665999599,
+            "fold": 4,
+            "macro_f1": 0.8473924198033336,
+            "mcc": 0.8362473247216498,
+            "predict_seconds": 0.0019119998905807734,
+            "rows": 8765,
+            "total_seconds": 5.4582665000343695
+          }
+        ],
+        "labels": [
+          "age",
+          "ethnicity",
+          "gender",
+          "religion",
+          "other_cyberbullying",
+          "not_cyberbullying"
+        ],
+        "per_class": [
+          {
+            "class": "age",
+            "f1": 0.9656453110492108,
+            "fold": 1,
+            "precision": 0.9517998779743746,
+            "recall": 0.9798994974874372,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9734680985470625,
+            "fold": 1,
+            "precision": 0.9740834386852086,
+            "recall": 0.9728535353535354,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8682926829268293,
+            "fold": 1,
+            "precision": 0.9243323442136498,
+            "recall": 0.8186596583442839,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9468150896722325,
+            "fold": 1,
+            "precision": 0.9346764346764347,
+            "recall": 0.9592731829573935,
+            "support": 1596
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7044844768110388,
+            "fold": 1,
+            "precision": 0.6564285714285715,
+            "recall": 0.760132340777502,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6479338842975206,
+            "fold": 1,
+            "precision": 0.6770293609671848,
+            "recall": 0.6212361331220285,
+            "support": 1262
+          },
+          {
+            "class": "age",
+            "f1": 0.9621588089330024,
+            "fold": 2,
+            "precision": 0.9503676470588235,
+            "recall": 0.9742462311557789,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9757327450362433,
+            "fold": 2,
+            "precision": 0.9741976085588421,
+            "recall": 0.9772727272727273,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8735475051264525,
+            "fold": 2,
+            "precision": 0.9102564102564102,
+            "recall": 0.8396846254927727,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9346546918550634,
+            "fold": 2,
+            "precision": 0.923500611995104,
+            "recall": 0.9460815047021943,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.69236700077101,
+            "fold": 2,
+            "precision": 0.6483754512635379,
+            "recall": 0.7427626137303557,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6333892617449665,
+            "fold": 2,
+            "precision": 0.6735057983942908,
+            "recall": 0.5977830562153602,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.9693023255813954,
+            "fold": 3,
+            "precision": 0.9577205882352942,
+            "recall": 0.9811676082862524,
+            "support": 1593
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9785488958990536,
+            "fold": 3,
+            "precision": 0.9779319041614124,
+            "recall": 0.9791666666666666,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8822733423545331,
+            "fold": 3,
+            "precision": 0.9093444909344491,
+            "recall": 0.8567674113009198,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9424792371577976,
+            "fold": 3,
+            "precision": 0.9251207729468599,
+            "recall": 0.9605015673981191,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7036163522012578,
+            "fold": 3,
+            "precision": 0.6699101796407185,
+            "recall": 0.7408940397350994,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6644295302013423,
+            "fold": 3,
+            "precision": 0.7065120428189117,
+            "recall": 0.6270783847980997,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.9644171779141104,
+            "fold": 4,
+            "precision": 0.9424460431654677,
+            "recall": 0.9874371859296482,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9823455233291298,
+            "fold": 4,
+            "precision": 0.9811083123425692,
+            "recall": 0.9835858585858586,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8790378006872852,
+            "fold": 4,
+            "precision": 0.9221341023792358,
+            "recall": 0.8397898883782009,
+            "support": 1523
+          },
+          {
+            "class": "religion",
+            "f1": 0.9415384615384615,
+            "fold": 4,
+            "precision": 0.9244712990936556,
+            "recall": 0.9592476489028213,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.6873545384018619,
+            "fold": 4,
+            "precision": 0.6467153284671533,
+            "recall": 0.7334437086092715,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6296610169491526,
+            "fold": 4,
+            "precision": 0.6773017319963537,
+            "recall": 0.5882818685669042,
+            "support": 1263
+          }
+        ],
+        "summary": {
+          "accuracy_mean": 0.8649458071876782,
+          "balanced_accuracy_mean": 0.851135289323718,
+          "macro_f1_mean": 0.8501455732910839,
+          "macro_f1_std": 0.004354620415466097,
+          "mcc_mean": 0.8380180116927509,
+          "runtime_seconds": 22.338838250027038
+        }
+      },
+      "p2__linear_svm_c1": {
+        "confusion_matrix": [
+          [
+            6179,
+            14,
+            15,
+            8,
+            55,
+            98
+          ],
+          [
+            7,
+            6220,
+            14,
+            13,
+            62,
+            20
+          ],
+          [
+            25,
+            33,
+            5225,
+            19,
+            390,
+            397
+          ],
+          [
+            4,
+            9,
+            25,
+            6114,
+            71,
+            158
+          ],
+          [
+            78,
+            78,
+            260,
+            53,
+            3452,
+            913
+          ],
+          [
+            207,
+            58,
+            275,
+            246,
+            1173,
+            3092
+          ]
+        ],
+        "folds": [
+          {
+            "accuracy": 0.8614945807187678,
+            "balanced_accuracy": 0.8476204618090147,
+            "feature_count": 39763,
+            "fit_seconds": 0.1612714589573443,
+            "fold": 1,
+            "macro_f1": 0.8471728784175561,
+            "mcc": 0.83369653342575,
+            "predict_seconds": 0.0012688339920714498,
+            "rows": 8765,
+            "total_seconds": 1.3217725000577047
+          },
+          {
+            "accuracy": 0.8619509412435824,
+            "balanced_accuracy": 0.8475868896656483,
+            "feature_count": 39771,
+            "fit_seconds": 0.15746412496082485,
+            "fold": 2,
+            "macro_f1": 0.8466727281760406,
+            "mcc": 0.8342346231589315,
+            "predict_seconds": 0.0013863339554518461,
+            "rows": 8765,
+            "total_seconds": 1.3248776249820367
+          },
+          {
+            "accuracy": 0.8703936109526526,
+            "balanced_accuracy": 0.8556434152355958,
+            "feature_count": 39498,
+            "fit_seconds": 0.1516361249377951,
+            "fold": 3,
+            "macro_f1": 0.8549083976492224,
+            "mcc": 0.8441404918082074,
+            "predict_seconds": 0.0013032079441472888,
+            "rows": 8765,
+            "total_seconds": 1.3158200000179932
+          },
+          {
+            "accuracy": 0.8610382201939533,
+            "balanced_accuracy": 0.8454035937724748,
+            "feature_count": 39630,
+            "fit_seconds": 0.16289183299522847,
+            "fold": 4,
+            "macro_f1": 0.84477691976781,
+            "mcc": 0.8329074373424936,
+            "predict_seconds": 0.0013558329083025455,
+            "rows": 8765,
+            "total_seconds": 1.3265017500380054
+          }
+        ],
+        "labels": [
+          "age",
+          "ethnicity",
+          "gender",
+          "religion",
+          "other_cyberbullying",
+          "not_cyberbullying"
+        ],
+        "per_class": [
+          {
+            "class": "age",
+            "f1": 0.9551122194513716,
+            "fold": 1,
+            "precision": 0.948019801980198,
+            "recall": 0.9623115577889447,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9732620320855615,
+            "fold": 1,
+            "precision": 0.9699059561128527,
+            "recall": 0.9766414141414141,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8719346049046321,
+            "fold": 1,
+            "precision": 0.9052333804809052,
+            "recall": 0.8409986859395532,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9586983729662077,
+            "fold": 1,
+            "precision": 0.9575,
+            "recall": 0.9598997493734336,
+            "support": 1596
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.6854020296643247,
+            "fold": 1,
+            "precision": 0.6489283074648928,
+            "recall": 0.7262200165425972,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6386280114332381,
+            "fold": 1,
+            "precision": 0.6588037068239259,
+            "recall": 0.6196513470681458,
+            "support": 1262
+          },
+          {
+            "class": "age",
+            "f1": 0.9599254426840633,
+            "fold": 2,
+            "precision": 0.9496004917025199,
+            "recall": 0.9704773869346733,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9767295597484277,
+            "fold": 2,
+            "precision": 0.9730576441102757,
+            "recall": 0.9804292929292929,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8767215317433658,
+            "fold": 2,
+            "precision": 0.8969072164948454,
+            "recall": 0.8574244415243101,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9471709909346671,
+            "fold": 2,
+            "precision": 0.9445137157107232,
+            "recall": 0.9498432601880877,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.68984375,
+            "fold": 2,
+            "precision": 0.6535899333826795,
+            "recall": 0.7303556658395368,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6296450939457202,
+            "fold": 2,
+            "precision": 0.666077738515901,
+            "recall": 0.5969912905779889,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.9626865671641791,
+            "fold": 3,
+            "precision": 0.9537892791127541,
+            "recall": 0.9717514124293786,
+            "support": 1593
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9759149202377229,
+            "fold": 3,
+            "precision": 0.9671419714817111,
+            "recall": 0.9848484848484849,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8847682119205298,
+            "fold": 3,
+            "precision": 0.8918558077436582,
+            "recall": 0.8777923784494087,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9561430793157076,
+            "fold": 3,
+            "precision": 0.9487654320987654,
+            "recall": 0.9636363636363636,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7000407000407001,
+            "fold": 3,
+            "precision": 0.688550840672538,
+            "recall": 0.7119205298013245,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6498969072164948,
+            "fold": 3,
+            "precision": 0.6781411359724613,
+            "recall": 0.6239113222486145,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.9634221946683199,
+            "fold": 4,
+            "precision": 0.9510403916768666,
+            "recall": 0.9761306532663316,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9774436090225563,
+            "fold": 4,
+            "precision": 0.9701492537313433,
+            "recall": 0.9848484848484849,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8781144781144781,
+            "fold": 4,
+            "precision": 0.9011748445058743,
+            "recall": 0.8562048588312541,
+            "support": 1523
+          },
+          {
+            "class": "religion",
+            "f1": 0.9491315136476427,
+            "fold": 4,
+            "precision": 0.9392265193370166,
+            "recall": 0.9592476489028213,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.676159479251424,
+            "fold": 4,
+            "precision": 0.6648,
+            "recall": 0.6879139072847682,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.624390243902439,
+            "fold": 4,
+            "precision": 0.6416040100250626,
+            "recall": 0.6080760095011877,
+            "support": 1263
+          }
+        ],
+        "summary": {
+          "accuracy_mean": 0.863719338277239,
+          "balanced_accuracy_mean": 0.8490635901206834,
+          "macro_f1_mean": 0.8483827310026573,
+          "macro_f1_std": 0.0038721458129878433,
+          "mcc_mean": 0.8362447714338457,
+          "runtime_seconds": 5.28897187509574
+        }
+      },
+      "p2__logistic_regression_c1": {
+        "confusion_matrix": [
+          [
+            6220,
+            11,
+            7,
+            4,
+            64,
+            63
+          ],
+          [
+            9,
+            6197,
+            17,
+            11,
+            76,
+            26
+          ],
+          [
+            20,
+            24,
+            5130,
+            21,
+            448,
+            446
+          ],
+          [
+            4,
+            11,
+            23,
+            6094,
+            89,
+            160
+          ],
+          [
+            70,
+            79,
+            219,
+            91,
+            3593,
+            782
+          ],
+          [
+            235,
+            48,
+            186,
+            230,
+            1263,
+            3089
+          ]
+        ],
+        "folds": [
+          {
+            "accuracy": 0.8618368511123787,
+            "balanced_accuracy": 0.8486386309407655,
+            "feature_count": 39763,
+            "fit_seconds": 1.368117916979827,
+            "fold": 1,
+            "macro_f1": 0.847899647762871,
+            "mcc": 0.834451951851758,
+            "predict_seconds": 0.001265041995793581,
+            "rows": 8765,
+            "total_seconds": 2.5485042090294883
+          },
+          {
+            "accuracy": 0.8652595550484883,
+            "balanced_accuracy": 0.8519628225026183,
+            "feature_count": 39771,
+            "fit_seconds": 1.1619887079577893,
+            "fold": 2,
+            "macro_f1": 0.8510979019853355,
+            "mcc": 0.8384879267323361,
+            "predict_seconds": 0.0012726670829579234,
+            "rows": 8765,
+            "total_seconds": 2.3325246659806
+          },
+          {
+            "accuracy": 0.8716486023958927,
+            "balanced_accuracy": 0.8582608546892684,
+            "feature_count": 39498,
+            "fit_seconds": 1.2213103749090806,
+            "fold": 3,
+            "macro_f1": 0.8574311487123714,
+            "mcc": 0.845963444533578,
+            "predict_seconds": 0.001307333935983479,
+            "rows": 8765,
+            "total_seconds": 2.3892401249613613
+          },
+          {
+            "accuracy": 0.8608100399315459,
+            "balanced_accuracy": 0.8458229339626023,
+            "feature_count": 39630,
+            "fit_seconds": 1.207347665913403,
+            "fold": 4,
+            "macro_f1": 0.8450116041215652,
+            "mcc": 0.8328939331273745,
+            "predict_seconds": 0.0012820420088246465,
+            "rows": 8765,
+            "total_seconds": 2.373637249926105
+          }
+        ],
+        "labels": [
+          "age",
+          "ethnicity",
+          "gender",
+          "religion",
+          "other_cyberbullying",
+          "not_cyberbullying"
+        ],
+        "per_class": [
+          {
+            "class": "age",
+            "f1": 0.9548546691403834,
+            "fold": 1,
+            "precision": 0.9403166869671132,
+            "recall": 0.9698492462311558,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9744075829383886,
+            "fold": 1,
+            "precision": 0.9753320683111955,
+            "recall": 0.9734848484848485,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8689320388349514,
+            "fold": 1,
+            "precision": 0.919970631424376,
+            "recall": 0.8232588699080158,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.954786404739632,
+            "fold": 1,
+            "precision": 0.9503414028553694,
+            "recall": 0.9592731829573935,
+            "support": 1596
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.6907294832826748,
+            "fold": 1,
+            "precision": 0.6387912860154603,
+            "recall": 0.7518610421836228,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.643687707641196,
+            "fold": 1,
+            "precision": 0.6762652705061082,
+            "recall": 0.6141045958795562,
+            "support": 1262
+          },
+          {
+            "class": "age",
+            "f1": 0.9637434149364735,
+            "fold": 2,
+            "precision": 0.9510703363914373,
+            "recall": 0.9767587939698492,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9748585795097423,
+            "fold": 2,
+            "precision": 0.9705882352941176,
+            "recall": 0.9791666666666666,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8820301783264746,
+            "fold": 2,
+            "precision": 0.9225251076040172,
+            "recall": 0.8449408672798949,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9451926088318197,
+            "fold": 2,
+            "precision": 0.9443053817271589,
+            "recall": 0.9460815047021943,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.6966806562380771,
+            "fold": 2,
+            "precision": 0.646600566572238,
+            "recall": 0.7551695616211745,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.644081974069427,
+            "fold": 2,
+            "precision": 0.6826241134751773,
+            "recall": 0.6096595407759303,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.9679227654936157,
+            "fold": 3,
+            "precision": 0.9604449938195303,
+            "recall": 0.975517890772128,
+            "support": 1593
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9735349716446124,
+            "fold": 3,
+            "precision": 0.9716981132075472,
+            "recall": 0.9753787878787878,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8870094722598105,
+            "fold": 3,
+            "precision": 0.9142259414225942,
+            "recall": 0.8613666228646518,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9560884459669885,
+            "fold": 3,
+            "precision": 0.9498762376237624,
+            "recall": 0.9623824451410659,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7080745341614907,
+            "fold": 3,
+            "precision": 0.6666666666666666,
+            "recall": 0.7549668874172185,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6519567027477102,
+            "fold": 3,
+            "precision": 0.6874451273046532,
+            "recall": 0.6199524940617577,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.9628264208909371,
+            "fold": 4,
+            "precision": 0.9422730006013229,
+            "recall": 0.9842964824120602,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9789638932496075,
+            "fold": 4,
+            "precision": 0.9737663960024985,
+            "recall": 0.9842171717171717,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8782161234991424,
+            "fold": 4,
+            "precision": 0.9195402298850575,
+            "recall": 0.8404464871963231,
+            "support": 1523
+          },
+          {
+            "class": "religion",
+            "f1": 0.943185346165787,
+            "fold": 4,
+            "precision": 0.9341943419434194,
+            "recall": 0.9523510971786834,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.6769109535066982,
+            "fold": 4,
+            "precision": 0.6458646616541354,
+            "recall": 0.7110927152317881,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6299668874172185,
+            "fold": 4,
+            "precision": 0.6600173460537727,
+            "recall": 0.6025336500395883,
+            "support": 1263
+          }
+        ],
+        "summary": {
+          "accuracy_mean": 0.8648887621220764,
+          "balanced_accuracy_mean": 0.8511713105238137,
+          "macro_f1_mean": 0.8503600756455357,
+          "macro_f1_std": 0.004615309172545994,
+          "mcc_mean": 0.8379493140612616,
+          "runtime_seconds": 9.643906249897555
+        }
+      }
+    },
+    "representations": {
+      "character__linear_svm_c1": {
+        "confusion_matrix": [
+          [
+            6249,
+            3,
+            4,
+            5,
+            51,
+            57
+          ],
+          [
+            6,
+            6240,
+            9,
+            10,
+            41,
+            30
+          ],
+          [
+            15,
+            15,
+            5304,
+            27,
+            354,
+            374
+          ],
+          [
+            4,
+            6,
+            27,
+            6123,
+            68,
+            153
+          ],
+          [
+            76,
+            41,
+            245,
+            31,
+            3598,
+            843
+          ],
+          [
+            176,
+            51,
+            257,
+            234,
+            1046,
+            3287
+          ]
+        ],
+        "folds": [
+          {
+            "accuracy": 0.8811180832857958,
+            "balanced_accuracy": 0.8688638300694503,
+            "feature_count": 80000,
+            "fit_seconds": 1.1490793330594897,
+            "fold": 1,
+            "macro_f1": 0.8684658705027176,
+            "mcc": 0.8571411426135322,
+            "predict_seconds": 0.00834537495393306,
+            "rows": 8765,
+            "total_seconds": 5.786106250016019
+          },
+          {
+            "accuracy": 0.8768967484312606,
+            "balanced_accuracy": 0.8640000650077099,
+            "feature_count": 80000,
+            "fit_seconds": 1.121683125034906,
+            "fold": 2,
+            "macro_f1": 0.8635483131228758,
+            "mcc": 0.8520272346781098,
+            "predict_seconds": 0.008232499938458204,
+            "rows": 8765,
+            "total_seconds": 5.749035458080471
+          },
+          {
+            "accuracy": 0.8796349115801483,
+            "balanced_accuracy": 0.865736066829336,
+            "feature_count": 80000,
+            "fit_seconds": 1.1298246249789372,
+            "fold": 3,
+            "macro_f1": 0.8651335839648978,
+            "mcc": 0.855273561952337,
+            "predict_seconds": 0.008268500096164644,
+            "rows": 8765,
+            "total_seconds": 5.7721104169031605
+          },
+          {
+            "accuracy": 0.8764403879064461,
+            "balanced_accuracy": 0.8625511037531375,
+            "feature_count": 80000,
+            "fit_seconds": 1.1439916669623926,
+            "fold": 4,
+            "macro_f1": 0.8618537274786106,
+            "mcc": 0.851569216101377,
+            "predict_seconds": 0.008284833049401641,
+            "rows": 8765,
+            "total_seconds": 5.804846792016178
+          }
+        ],
+        "labels": [
+          "age",
+          "ethnicity",
+          "gender",
+          "religion",
+          "other_cyberbullying",
+          "not_cyberbullying"
+        ],
+        "per_class": [
+          {
+            "class": "age",
+            "f1": 0.9664596273291925,
+            "fold": 1,
+            "precision": 0.9557739557739557,
+            "recall": 0.9773869346733668,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9829437776373974,
+            "fold": 1,
+            "precision": 0.9835651074589128,
+            "recall": 0.9823232323232324,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8879864636209814,
+            "fold": 1,
+            "precision": 0.9155617585484996,
+            "recall": 0.8620236530880421,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9581772784019975,
+            "fold": 1,
+            "precision": 0.9546019900497512,
+            "recall": 0.9617794486215538,
+            "support": 1596
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7335197762684779,
+            "fold": 1,
+            "precision": 0.7094281298299846,
+            "recall": 0.7593052109181141,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6817082997582594,
+            "fold": 1,
+            "precision": 0.6934426229508197,
+            "recall": 0.6703645007923931,
+            "support": 1262
+          },
+          {
+            "class": "age",
+            "f1": 0.9660753190164955,
+            "fold": 2,
+            "precision": 0.9574336829117829,
+            "recall": 0.9748743718592965,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9814056098329657,
+            "fold": 2,
+            "precision": 0.9798615481434865,
+            "recall": 0.9829545454545454,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8882215548882215,
+            "fold": 2,
+            "precision": 0.9023728813559322,
+            "recall": 0.8745072273324573,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9538461538461539,
+            "fold": 2,
+            "precision": 0.9553459119496855,
+            "recall": 0.9523510971786834,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7218225419664268,
+            "fold": 2,
+            "precision": 0.6983758700696056,
+            "recall": 0.7468982630272953,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6699186991869919,
+            "fold": 2,
+            "precision": 0.6883876357560568,
+            "recall": 0.6524148851939826,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.9720670391061452,
+            "fold": 3,
+            "precision": 0.9613259668508287,
+            "recall": 0.9830508474576272,
+            "support": 1593
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9845766446333019,
+            "fold": 3,
+            "precision": 0.9817953546767106,
+            "recall": 0.9873737373737373,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8852023888520238,
+            "fold": 3,
+            "precision": 0.8941018766756033,
+            "recall": 0.8764783180026281,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9599005284426484,
+            "fold": 3,
+            "precision": 0.9519112207151664,
+            "recall": 0.9680250783699059,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7171799027552674,
+            "fold": 3,
+            "precision": 0.7023809523809523,
+            "recall": 0.7326158940397351,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.671875,
+            "fold": 3,
+            "precision": 0.6988879384088965,
+            "recall": 0.6468725257323832,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.9722222222222222,
+            "fold": 4,
+            "precision": 0.9557038834951457,
+            "recall": 0.989321608040201,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9842569269521411,
+            "fold": 4,
+            "precision": 0.9817839195979899,
+            "recall": 0.9867424242424242,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8939036712697878,
+            "fold": 4,
+            "precision": 0.9177040110650069,
+            "recall": 0.871306631648063,
+            "support": 1523
+          },
+          {
+            "class": "religion",
+            "f1": 0.9516380655226209,
+            "fold": 4,
+            "precision": 0.9472049689440993,
+            "recall": 0.9561128526645768,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7082175466454942,
+            "fold": 4,
+            "precision": 0.6803966437833715,
+            "recall": 0.7384105960264901,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6608839322593969,
+            "fold": 4,
+            "precision": 0.690846286701209,
+            "recall": 0.6334125098970704,
+            "support": 1263
+          }
+        ],
+        "summary": {
+          "accuracy_mean": 0.8785225328009127,
+          "balanced_accuracy_mean": 0.8652877664149085,
+          "macro_f1_mean": 0.8647503737672755,
+          "macro_f1_std": 0.002438610032431063,
+          "mcc_mean": 0.8540027888363391,
+          "runtime_seconds": 23.112098917015828
+        }
+      },
+      "character__logistic_regression_c1": {
+        "confusion_matrix": [
+          [
+            6233,
+            3,
+            4,
+            4,
+            56,
+            69
+          ],
+          [
+            8,
+            6223,
+            7,
+            13,
+            46,
+            39
+          ],
+          [
+            12,
+            8,
+            5195,
+            25,
+            391,
+            458
+          ],
+          [
+            5,
+            5,
+            19,
+            6105,
+            81,
+            166
+          ],
+          [
+            64,
+            27,
+            204,
+            35,
+            3731,
+            773
+          ],
+          [
+            166,
+            39,
+            205,
+            217,
+            1075,
+            3349
+          ]
+        ],
+        "folds": [
+          {
+            "accuracy": 0.8788362806617228,
+            "balanced_accuracy": 0.8674408947979737,
+            "feature_count": 80000,
+            "fit_seconds": 6.046722374972887,
+            "fold": 1,
+            "macro_f1": 0.8671502453198556,
+            "mcc": 0.8545674358221161,
+            "predict_seconds": 0.00947716599330306,
+            "rows": 8765,
+            "total_seconds": 10.709951750002801
+          },
+          {
+            "accuracy": 0.8776953793496862,
+            "balanced_accuracy": 0.8663203047520495,
+            "feature_count": 80000,
+            "fit_seconds": 5.817215917049907,
+            "fold": 2,
+            "macro_f1": 0.8657982647533392,
+            "mcc": 0.8532276813044001,
+            "predict_seconds": 0.008351042051799595,
+            "rows": 8765,
+            "total_seconds": 10.47181112493854
+          },
+          {
+            "accuracy": 0.8818026240730177,
+            "balanced_accuracy": 0.8692291812018919,
+            "feature_count": 80000,
+            "fit_seconds": 5.688872000086121,
+            "fold": 3,
+            "macro_f1": 0.8688242315929916,
+            "mcc": 0.857969802755744,
+            "predict_seconds": 0.008205624995753169,
+            "rows": 8765,
+            "total_seconds": 10.345342874992639
+          },
+          {
+            "accuracy": 0.879749001711352,
+            "balanced_accuracy": 0.8674081210087407,
+            "feature_count": 80000,
+            "fit_seconds": 6.190996999968775,
+            "fold": 4,
+            "macro_f1": 0.8666074030918253,
+            "mcc": 0.8557809906087398,
+            "predict_seconds": 0.008186249993741512,
+            "rows": 8765,
+            "total_seconds": 10.98991262493655
+          }
+        ],
+        "labels": [
+          "age",
+          "ethnicity",
+          "gender",
+          "religion",
+          "other_cyberbullying",
+          "not_cyberbullying"
+        ],
+        "per_class": [
+          {
+            "class": "age",
+            "f1": 0.9675,
+            "fold": 1,
+            "precision": 0.9626865671641791,
+            "recall": 0.9723618090452262,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9831585637114713,
+            "fold": 1,
+            "precision": 0.9897632757517595,
+            "recall": 0.9766414141414141,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8821710752318791,
+            "fold": 1,
+            "precision": 0.9244060475161987,
+            "recall": 0.8436268068331143,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9575530586766542,
+            "fold": 1,
+            "precision": 0.9539800995024875,
+            "recall": 0.9611528822055138,
+            "support": 1596
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7344854673998429,
+            "fold": 1,
+            "precision": 0.6993268511593119,
+            "recall": 0.7733664185277088,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6780333068992863,
+            "fold": 1,
+            "precision": 0.6785714285714286,
+            "recall": 0.6774960380348652,
+            "support": 1262
+          },
+          {
+            "class": "age",
+            "f1": 0.9690528290090653,
+            "fold": 2,
+            "precision": 0.9645301804604853,
+            "recall": 0.9736180904522613,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9829222011385199,
+            "fold": 2,
+            "precision": 0.9847908745247148,
+            "recall": 0.9810606060606061,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8866189989785496,
+            "fold": 2,
+            "precision": 0.9201413427561838,
+            "recall": 0.8554533508541393,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9483627204030227,
+            "fold": 2,
+            "precision": 0.952561669829222,
+            "recall": 0.9442006269592477,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7339022498060512,
+            "fold": 2,
+            "precision": 0.6910153396639883,
+            "recall": 0.782464846980976,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6739305891848265,
+            "fold": 2,
+            "precision": 0.6872427983539094,
+            "recall": 0.6611243072050673,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.9699038163201986,
+            "fold": 3,
+            "precision": 0.9588957055214724,
+            "recall": 0.9811676082862524,
+            "support": 1593
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9845279444269024,
+            "fold": 3,
+            "precision": 0.9848389134554643,
+            "recall": 0.9842171717171717,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8881378844204123,
+            "fold": 3,
+            "precision": 0.9144050104384134,
+            "recall": 0.8633377135348226,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9618511569731082,
+            "fold": 3,
+            "precision": 0.9594510293200249,
+            "recall": 0.9642633228840125,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7270550678371908,
+            "fold": 3,
+            "precision": 0.7018489984591679,
+            "recall": 0.7541390728476821,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6814695195801372,
+            "fold": 3,
+            "precision": 0.6952224052718287,
+            "recall": 0.6682501979414094,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.971870170015456,
+            "fold": 4,
+            "precision": 0.9567863664029215,
+            "recall": 0.9874371859296482,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9876777251184834,
+            "fold": 4,
+            "precision": 0.9886148007590133,
+            "recall": 0.9867424242424242,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8882030178326474,
+            "fold": 4,
+            "precision": 0.9296482412060302,
+            "recall": 0.8502954694681549,
+            "support": 1523
+          },
+          {
+            "class": "religion",
+            "f1": 0.9537788881948782,
+            "fold": 4,
+            "precision": 0.9502177971375233,
+            "recall": 0.9573667711598746,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7267801857585139,
+            "fold": 4,
+            "precision": 0.6824127906976745,
+            "recall": 0.777317880794702,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.671334431630972,
+            "fold": 4,
+            "precision": 0.6995708154506438,
+            "recall": 0.6452889944576405,
+            "support": 1263
+          }
+        ],
+        "summary": {
+          "accuracy_mean": 0.8795208214489446,
+          "balanced_accuracy_mean": 0.8675996254401639,
+          "macro_f1_mean": 0.8670950361895029,
+          "macro_f1_std": 0.0011082155687321723,
+          "mcc_mean": 0.85538647762275,
+          "runtime_seconds": 42.51701837487053
+        }
+      },
+      "combined__linear_svm_c1": {
+        "confusion_matrix": [
+          [
+            6251,
+            4,
+            8,
+            4,
+            45,
+            57
+          ],
+          [
+            5,
+            6247,
+            9,
+            8,
+            36,
+            31
+          ],
+          [
+            13,
+            20,
+            5313,
+            21,
+            328,
+            394
+          ],
+          [
+            2,
+            7,
+            24,
+            6122,
+            67,
+            159
+          ],
+          [
+            77,
+            44,
+            235,
+            22,
+            3643,
+            813
+          ],
+          [
+            169,
+            55,
+            263,
+            237,
+            1063,
+            3264
+          ]
+        ],
+        "folds": [
+          {
+            "accuracy": 0.8827153451226469,
+            "balanced_accuracy": 0.8709110034878386,
+            "feature_count": 120000,
+            "fit_seconds": 1.4577245829859748,
+            "fold": 1,
+            "macro_f1": 0.8704228564565589,
+            "mcc": 0.8590990428235973,
+            "predict_seconds": 0.009943332988768816,
+            "rows": 8765,
+            "total_seconds": 9.089276332990266
+          },
+          {
+            "accuracy": 0.8779235596120936,
+            "balanced_accuracy": 0.8649853585738719,
+            "feature_count": 120000,
+            "fit_seconds": 1.515105750062503,
+            "fold": 2,
+            "macro_f1": 0.8643491619927027,
+            "mcc": 0.8533002872787037,
+            "predict_seconds": 0.011252040974795818,
+            "rows": 8765,
+            "total_seconds": 9.13759904098697
+          },
+          {
+            "accuracy": 0.8811180832857958,
+            "balanced_accuracy": 0.8673002779617685,
+            "feature_count": 120000,
+            "fit_seconds": 1.4415845830226317,
+            "fold": 3,
+            "macro_f1": 0.8666900939456013,
+            "mcc": 0.8570461309901981,
+            "predict_seconds": 0.009831042028963566,
+            "rows": 8765,
+            "total_seconds": 9.12345579196699
+          },
+          {
+            "accuracy": 0.8767826583000571,
+            "balanced_accuracy": 0.8629528498431803,
+            "feature_count": 120000,
+            "fit_seconds": 1.4091295000398532,
+            "fold": 4,
+            "macro_f1": 0.8620829853854598,
+            "mcc": 0.8519826644253231,
+            "predict_seconds": 0.011276832898147404,
+            "rows": 8765,
+            "total_seconds": 8.976085582980886
+          }
+        ],
+        "labels": [
+          "age",
+          "ethnicity",
+          "gender",
+          "religion",
+          "other_cyberbullying",
+          "not_cyberbullying"
+        ],
+        "per_class": [
+          {
+            "class": "age",
+            "f1": 0.9692068429237947,
+            "fold": 1,
+            "precision": 0.9599507085643869,
+            "recall": 0.9786432160804021,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.982367758186398,
+            "fold": 1,
+            "precision": 0.9798994974874372,
+            "recall": 0.9848484848484849,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8866259334691107,
+            "fold": 1,
+            "precision": 0.9171348314606742,
+            "recall": 0.8580814717477004,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9580463368816531,
+            "fold": 1,
+            "precision": 0.9574468085106383,
+            "recall": 0.9586466165413534,
+            "support": 1596
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7413587604290822,
+            "fold": 1,
+            "precision": 0.713302752293578,
+            "recall": 0.771712158808933,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.684931506849315,
+            "fold": 1,
+            "precision": 0.6967213114754098,
+            "recall": 0.6735340729001584,
+            "support": 1262
+          },
+          {
+            "class": "age",
+            "f1": 0.9680024852438646,
+            "fold": 2,
+            "precision": 0.9575906576521205,
+            "recall": 0.9786432160804021,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9802073515551367,
+            "fold": 2,
+            "precision": 0.975609756097561,
+            "recall": 0.9848484848484849,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8895562228895563,
+            "fold": 2,
+            "precision": 0.903728813559322,
+            "recall": 0.8758212877792378,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.95561850802644,
+            "fold": 2,
+            "precision": 0.9595448798988622,
+            "recall": 0.9517241379310345,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7260437375745527,
+            "fold": 2,
+            "precision": 0.6990811638591118,
+            "recall": 0.7551695616211745,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6666666666666666,
+            "fold": 2,
+            "precision": 0.6913265306122449,
+            "recall": 0.6437054631828979,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.9717303510406958,
+            "fold": 3,
+            "precision": 0.9618696186961869,
+            "recall": 0.9817953546767106,
+            "support": 1593
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9836477987421384,
+            "fold": 3,
+            "precision": 0.9799498746867168,
+            "recall": 0.9873737373737373,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8896232650363516,
+            "fold": 3,
+            "precision": 0.8949468085106383,
+            "recall": 0.8843626806833115,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9619700748129676,
+            "fold": 3,
+            "precision": 0.9566026038437694,
+            "recall": 0.967398119122257,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7232142857142857,
+            "fold": 3,
+            "precision": 0.7093949044585988,
+            "recall": 0.7375827814569537,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6699547883271681,
+            "fold": 3,
+            "precision": 0.6965811965811965,
+            "recall": 0.6452889944576405,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.9718527683266316,
+            "fold": 4,
+            "precision": 0.9573430834856794,
+            "recall": 0.9868090452261307,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9848771266540642,
+            "fold": 4,
+            "precision": 0.9830188679245283,
+            "recall": 0.9867424242424242,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8936742934051144,
+            "fold": 4,
+            "precision": 0.9164941338854382,
+            "recall": 0.8719632304661852,
+            "support": 1523
+          },
+          {
+            "class": "religion",
+            "f1": 0.9521144278606966,
+            "fold": 4,
+            "precision": 0.9444787168414559,
+            "recall": 0.9598746081504702,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.719047619047619,
+            "fold": 4,
+            "precision": 0.6905487804878049,
+            "recall": 0.75,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6509316770186335,
+            "fold": 4,
+            "precision": 0.6822916666666666,
+            "recall": 0.6223277909738717,
+            "support": 1263
+          }
+        ],
+        "summary": {
+          "accuracy_mean": 0.8796349115801484,
+          "balanced_accuracy_mean": 0.8665373724666648,
+          "macro_f1_mean": 0.8658862744450807,
+          "macro_f1_std": 0.003084413416622859,
+          "mcc_mean": 0.8553570313794556,
+          "runtime_seconds": 36.32641674892511
+        }
+      },
+      "combined__logistic_regression_c1": {
+        "confusion_matrix": [
+          [
+            6238,
+            3,
+            6,
+            4,
+            51,
+            67
+          ],
+          [
+            6,
+            6232,
+            4,
+            8,
+            54,
+            32
+          ],
+          [
+            13,
+            9,
+            5235,
+            23,
+            379,
+            430
+          ],
+          [
+            4,
+            4,
+            18,
+            6113,
+            71,
+            171
+          ],
+          [
+            66,
+            26,
+            209,
+            35,
+            3744,
+            754
+          ],
+          [
+            152,
+            39,
+            224,
+            222,
+            1069,
+            3345
+          ]
+        ],
+        "folds": [
+          {
+            "accuracy": 0.8824871648602396,
+            "balanced_accuracy": 0.871380719171452,
+            "feature_count": 120000,
+            "fit_seconds": 6.882721000001766,
+            "fold": 1,
+            "macro_f1": 0.870972561313296,
+            "mcc": 0.8589527358602498,
+            "predict_seconds": 0.011139500071294606,
+            "rows": 8765,
+            "total_seconds": 14.49416333308909
+          },
+          {
+            "accuracy": 0.8782658300057045,
+            "balanced_accuracy": 0.8665327340886063,
+            "feature_count": 120000,
+            "fit_seconds": 6.576572417048737,
+            "fold": 2,
+            "macro_f1": 0.8660508886024734,
+            "mcc": 0.8538603807732912,
+            "predict_seconds": 0.009676584042608738,
+            "rows": 8765,
+            "total_seconds": 14.148031249991618
+          },
+          {
+            "accuracy": 0.8856816885339418,
+            "balanced_accuracy": 0.8732219663933285,
+            "feature_count": 120000,
+            "fit_seconds": 7.728465083986521,
+            "fold": 3,
+            "macro_f1": 0.8726607940118255,
+            "mcc": 0.8626474985847817,
+            "predict_seconds": 0.009719165973365307,
+            "rows": 8765,
+            "total_seconds": 15.334144624997862
+          },
+          {
+            "accuracy": 0.879749001711352,
+            "balanced_accuracy": 0.8672144803518145,
+            "feature_count": 120000,
+            "fit_seconds": 6.412143333000131,
+            "fold": 4,
+            "macro_f1": 0.8664256130889024,
+            "mcc": 0.8557042393238171,
+            "predict_seconds": 0.009587208041921258,
+            "rows": 8765,
+            "total_seconds": 13.972240624949336
+          }
+        ],
+        "labels": [
+          "age",
+          "ethnicity",
+          "gender",
+          "religion",
+          "other_cyberbullying",
+          "not_cyberbullying"
+        ],
+        "per_class": [
+          {
+            "class": "age",
+            "f1": 0.9693174702567313,
+            "fold": 1,
+            "precision": 0.9662921348314607,
+            "recall": 0.9723618090452262,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9838146620120597,
+            "fold": 1,
+            "precision": 0.9891512444160817,
+            "recall": 0.9785353535353535,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8873673399520712,
+            "fold": 1,
+            "precision": 0.9263759828448892,
+            "recall": 0.8515111695137977,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9590752889721962,
+            "fold": 1,
+            "precision": 0.956386292834891,
+            "recall": 0.9617794486215538,
+            "support": 1596
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7447141738449491,
+            "fold": 1,
+            "precision": 0.7070631970260223,
+            "recall": 0.7866004962779156,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6815464328417696,
+            "fold": 1,
+            "precision": 0.6856455493183641,
+            "recall": 0.6774960380348652,
+            "support": 1262
+          },
+          {
+            "class": "age",
+            "f1": 0.9694323144104804,
+            "fold": 2,
+            "precision": 0.9628252788104089,
+            "recall": 0.9761306532663316,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9851500789889416,
+            "fold": 2,
+            "precision": 0.9860847564832385,
+            "recall": 0.9842171717171717,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8864021702271957,
+            "fold": 2,
+            "precision": 0.9159074982480728,
+            "recall": 0.8587385019710907,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9498896942956193,
+            "fold": 2,
+            "precision": 0.9550063371356147,
+            "recall": 0.9448275862068966,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7293291731669267,
+            "fold": 2,
+            "precision": 0.6900369003690037,
+            "recall": 0.7733664185277088,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6761019005256773,
+            "fold": 2,
+            "precision": 0.6909090909090909,
+            "recall": 0.6619160728424386,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.973225404732254,
+            "fold": 3,
+            "precision": 0.9654107473749228,
+            "recall": 0.9811676082862524,
+            "support": 1593
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9857909693716451,
+            "fold": 3,
+            "precision": 0.9861023373341756,
+            "recall": 0.985479797979798,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8928332217012726,
+            "fold": 3,
+            "precision": 0.9105191256830601,
+            "recall": 0.8758212877792378,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.96375,
+            "fold": 3,
+            "precision": 0.9607476635514018,
+            "recall": 0.9667711598746082,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7354224514081713,
+            "fold": 3,
+            "precision": 0.7060167555217061,
+            "recall": 0.7673841059602649,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6849427168576104,
+            "fold": 3,
+            "precision": 0.7087214225232854,
+            "recall": 0.66270783847981,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.9721878862793573,
+            "fold": 4,
+            "precision": 0.9568126520681265,
+            "recall": 0.9880653266331658,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9867340492735313,
+            "fold": 4,
+            "precision": 0.9873577749683944,
+            "recall": 0.9861111111111112,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8869921474906112,
+            "fold": 4,
+            "precision": 0.9238975817923186,
+            "recall": 0.8529218647406435,
+            "support": 1523
+          },
+          {
+            "class": "religion",
+            "f1": 0.952054794520548,
+            "fold": 4,
+            "precision": 0.9455782312925171,
+            "recall": 0.9586206896551724,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7264923917284433,
+            "fold": 4,
+            "precision": 0.6870848708487085,
+            "recall": 0.7706953642384106,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6740924092409241,
+            "fold": 4,
+            "precision": 0.7037037037037037,
+            "recall": 0.6468725257323832,
+            "support": 1263
+          }
+        ],
+        "summary": {
+          "accuracy_mean": 0.8815459212778094,
+          "balanced_accuracy_mean": 0.8695874750013003,
+          "macro_f1_mean": 0.8690274642541242,
+          "macro_f1_std": 0.0028554386612989614,
+          "mcc_mean": 0.8577912136355349,
+          "runtime_seconds": 57.94857983302791
+        }
+      },
+      "word__linear_svm_c1": {
+        "confusion_matrix": [
+          [
+            6256,
+            7,
+            8,
+            6,
+            48,
+            44
+          ],
+          [
+            7,
+            6230,
+            10,
+            7,
+            53,
+            29
+          ],
+          [
+            21,
+            32,
+            5229,
+            33,
+            380,
+            394
+          ],
+          [
+            8,
+            7,
+            21,
+            6121,
+            78,
+            146
+          ],
+          [
+            94,
+            74,
+            261,
+            80,
+            3486,
+            839
+          ],
+          [
+            218,
+            56,
+            253,
+            271,
+            1181,
+            3072
+          ]
+        ],
+        "folds": [
+          {
+            "accuracy": 0.8683399885909869,
+            "balanced_accuracy": 0.8545143567639061,
+            "feature_count": 70605,
+            "fit_seconds": 0.2627827909309417,
+            "fold": 1,
+            "macro_f1": 0.8536893623217964,
+            "mcc": 0.8418989242325343,
+            "predict_seconds": 0.0020953750936314464,
+            "rows": 8765,
+            "total_seconds": 3.204258584068157
+          },
+          {
+            "accuracy": 0.8629777524244153,
+            "balanced_accuracy": 0.8479191824312237,
+            "feature_count": 70742,
+            "fit_seconds": 0.2603586660698056,
+            "fold": 2,
+            "macro_f1": 0.8469375811608496,
+            "mcc": 0.835413616560645,
+            "predict_seconds": 0.002069625072181225,
+            "rows": 8765,
+            "total_seconds": 3.1924333750503138
+          },
+          {
+            "accuracy": 0.8717626925270964,
+            "balanced_accuracy": 0.8570917738993638,
+            "feature_count": 70450,
+            "fit_seconds": 0.2435497079277411,
+            "fold": 3,
+            "macro_f1": 0.8561711382105518,
+            "mcc": 0.8458834542364367,
+            "predict_seconds": 0.0021056669065728784,
+            "rows": 8765,
+            "total_seconds": 3.187661209027283
+          },
+          {
+            "accuracy": 0.8645750142612664,
+            "balanced_accuracy": 0.8490645819517689,
+            "feature_count": 70262,
+            "fit_seconds": 0.24356662505306304,
+            "fold": 4,
+            "macro_f1": 0.8478787560377065,
+            "mcc": 0.8373488094734253,
+            "predict_seconds": 0.0021520410664379597,
+            "rows": 8765,
+            "total_seconds": 3.178061499958858
+          }
+        ],
+        "labels": [
+          "age",
+          "ethnicity",
+          "gender",
+          "religion",
+          "other_cyberbullying",
+          "not_cyberbullying"
+        ],
+        "per_class": [
+          {
+            "class": "age",
+            "f1": 0.9650911337658326,
+            "fold": 1,
+            "precision": 0.9495440729483283,
+            "recall": 0.9811557788944724,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9739730322985262,
+            "fold": 1,
+            "precision": 0.967601246105919,
+            "recall": 0.9804292929292929,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8763661202185792,
+            "fold": 1,
+            "precision": 0.9125177809388336,
+            "recall": 0.842969776609724,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9524992238435268,
+            "fold": 1,
+            "precision": 0.944,
+            "recall": 0.9611528822055138,
+            "support": 1596
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7032359905288083,
+            "fold": 1,
+            "precision": 0.6724528301886793,
+            "recall": 0.7369727047146402,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.650970673275506,
+            "fold": 1,
+            "precision": 0.6798964624676446,
+            "recall": 0.624405705229794,
+            "support": 1262
+          },
+          {
+            "class": "age",
+            "f1": 0.9633507853403142,
+            "fold": 2,
+            "precision": 0.9450151057401812,
+            "recall": 0.9824120603015075,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9773869346733668,
+            "fold": 2,
+            "precision": 0.9725,
+            "recall": 0.9823232323232324,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8783602150537635,
+            "fold": 2,
+            "precision": 0.8988995873452544,
+            "recall": 0.8587385019710907,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9449112978524743,
+            "fold": 2,
+            "precision": 0.9381953028430161,
+            "recall": 0.9517241379310345,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.6817102137767221,
+            "fold": 2,
+            "precision": 0.6537585421412301,
+            "recall": 0.7121588089330024,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6359060402684564,
+            "fold": 2,
+            "precision": 0.6761819803746655,
+            "recall": 0.6001583531274742,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.9652820830750155,
+            "fold": 3,
+            "precision": 0.9534598897734231,
+            "recall": 0.9774011299435028,
+            "support": 1593
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9798868636077939,
+            "fold": 3,
+            "precision": 0.9755944931163955,
+            "recall": 0.9842171717171717,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8865295288652952,
+            "fold": 3,
+            "precision": 0.8954423592493298,
+            "recall": 0.8777923784494087,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9522924411400248,
+            "fold": 3,
+            "precision": 0.9412124923453766,
+            "recall": 0.9636363636363636,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7014446227929374,
+            "fold": 3,
+            "precision": 0.6806853582554517,
+            "recall": 0.7235099337748344,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6515912897822446,
+            "fold": 3,
+            "precision": 0.6915555555555556,
+            "recall": 0.615993665874901,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.9641434262948207,
+            "fold": 4,
+            "precision": 0.9413524835427888,
+            "recall": 0.9880653266331658,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9802321932852213,
+            "fold": 4,
+            "precision": 0.974422956955708,
+            "recall": 0.9861111111111112,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8824923806298679,
+            "fold": 4,
+            "precision": 0.9111888111888112,
+            "recall": 0.855548260013132,
+            "support": 1523
+          },
+          {
+            "class": "religion",
+            "f1": 0.946555452579549,
+            "fold": 4,
+            "precision": 0.9330085261875761,
+            "recall": 0.9605015673981191,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.6858054226475279,
+            "fold": 4,
+            "precision": 0.6615384615384615,
+            "recall": 0.7119205298013245,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6280436607892528,
+            "fold": 4,
+            "precision": 0.6684539767649688,
+            "recall": 0.5922406967537609,
+            "support": 1263
+          }
+        ],
+        "summary": {
+          "accuracy_mean": 0.8669138619509412,
+          "balanced_accuracy_mean": 0.8521474737615655,
+          "macro_f1_mean": 0.851169209432726,
+          "macro_f1_std": 0.0038763456843679085,
+          "mcc_mean": 0.8401362011257603,
+          "runtime_seconds": 12.762414668104611
+        }
+      },
+      "word__logistic_regression_c1": {
+        "confusion_matrix": [
+          [
+            6246,
+            9,
+            5,
+            11,
+            50,
+            48
+          ],
+          [
+            7,
+            6198,
+            13,
+            13,
+            72,
+            33
+          ],
+          [
+            18,
+            25,
+            5107,
+            34,
+            458,
+            447
+          ],
+          [
+            3,
+            6,
+            23,
+            6102,
+            85,
+            162
+          ],
+          [
+            88,
+            67,
+            227,
+            121,
+            3598,
+            733
+          ],
+          [
+            209,
+            40,
+            198,
+            302,
+            1228,
+            3074
+          ]
+        ],
+        "folds": [
+          {
+            "accuracy": 0.8649172846548774,
+            "balanced_accuracy": 0.8520090580070301,
+            "feature_count": 70605,
+            "fit_seconds": 2.6135125829605386,
+            "fold": 1,
+            "macro_f1": 0.851106590550649,
+            "mcc": 0.8381036021311834,
+            "predict_seconds": 0.0019540830980986357,
+            "rows": 8765,
+            "total_seconds": 5.554392541991547
+          },
+          {
+            "accuracy": 0.860125499144324,
+            "balanced_accuracy": 0.8463051264281981,
+            "feature_count": 70742,
+            "fit_seconds": 2.7883101659826934,
+            "fold": 2,
+            "macro_f1": 0.8453083355777896,
+            "mcc": 0.8322157474342915,
+            "predict_seconds": 0.0019395409617573023,
+            "rows": 8765,
+            "total_seconds": 5.719368917052634
+          },
+          {
+            "accuracy": 0.8713063320022818,
+            "balanced_accuracy": 0.8575959463641928,
+            "feature_count": 70450,
+            "fit_seconds": 2.891980250016786,
+            "fold": 3,
+            "macro_f1": 0.8567749472325633,
+            "mcc": 0.8455053724838792,
+            "predict_seconds": 0.0019389159278944135,
+            "rows": 8765,
+            "total_seconds": 5.834511124994606
+          },
+          {
+            "accuracy": 0.8634341129492299,
+            "balanced_accuracy": 0.8486310264954509,
+            "feature_count": 70262,
+            "fit_seconds": 2.5428321668878198,
+            "fold": 4,
+            "macro_f1": 0.8473924198033336,
+            "mcc": 0.8362473247216498,
+            "predict_seconds": 0.0019579160725697875,
+            "rows": 8765,
+            "total_seconds": 5.465063750045374
+          }
+        ],
+        "labels": [
+          "age",
+          "ethnicity",
+          "gender",
+          "religion",
+          "other_cyberbullying",
+          "not_cyberbullying"
+        ],
+        "per_class": [
+          {
+            "class": "age",
+            "f1": 0.9656453110492108,
+            "fold": 1,
+            "precision": 0.9517998779743746,
+            "recall": 0.9798994974874372,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9734680985470625,
+            "fold": 1,
+            "precision": 0.9740834386852086,
+            "recall": 0.9728535353535354,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8682926829268293,
+            "fold": 1,
+            "precision": 0.9243323442136498,
+            "recall": 0.8186596583442839,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9468150896722325,
+            "fold": 1,
+            "precision": 0.9346764346764347,
+            "recall": 0.9592731829573935,
+            "support": 1596
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7044844768110388,
+            "fold": 1,
+            "precision": 0.6564285714285715,
+            "recall": 0.760132340777502,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6479338842975206,
+            "fold": 1,
+            "precision": 0.6770293609671848,
+            "recall": 0.6212361331220285,
+            "support": 1262
+          },
+          {
+            "class": "age",
+            "f1": 0.9621588089330024,
+            "fold": 2,
+            "precision": 0.9503676470588235,
+            "recall": 0.9742462311557789,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9757327450362433,
+            "fold": 2,
+            "precision": 0.9741976085588421,
+            "recall": 0.9772727272727273,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8735475051264525,
+            "fold": 2,
+            "precision": 0.9102564102564102,
+            "recall": 0.8396846254927727,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9346546918550634,
+            "fold": 2,
+            "precision": 0.923500611995104,
+            "recall": 0.9460815047021943,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.69236700077101,
+            "fold": 2,
+            "precision": 0.6483754512635379,
+            "recall": 0.7427626137303557,
+            "support": 1209
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6333892617449665,
+            "fold": 2,
+            "precision": 0.6735057983942908,
+            "recall": 0.5977830562153602,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.9693023255813954,
+            "fold": 3,
+            "precision": 0.9577205882352942,
+            "recall": 0.9811676082862524,
+            "support": 1593
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9785488958990536,
+            "fold": 3,
+            "precision": 0.9779319041614124,
+            "recall": 0.9791666666666666,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8822733423545331,
+            "fold": 3,
+            "precision": 0.9093444909344491,
+            "recall": 0.8567674113009198,
+            "support": 1522
+          },
+          {
+            "class": "religion",
+            "f1": 0.9424792371577976,
+            "fold": 3,
+            "precision": 0.9251207729468599,
+            "recall": 0.9605015673981191,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.7036163522012578,
+            "fold": 3,
+            "precision": 0.6699101796407185,
+            "recall": 0.7408940397350994,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6644295302013423,
+            "fold": 3,
+            "precision": 0.7065120428189117,
+            "recall": 0.6270783847980997,
+            "support": 1263
+          },
+          {
+            "class": "age",
+            "f1": 0.9644171779141104,
+            "fold": 4,
+            "precision": 0.9424460431654677,
+            "recall": 0.9874371859296482,
+            "support": 1592
+          },
+          {
+            "class": "ethnicity",
+            "f1": 0.9823455233291298,
+            "fold": 4,
+            "precision": 0.9811083123425692,
+            "recall": 0.9835858585858586,
+            "support": 1584
+          },
+          {
+            "class": "gender",
+            "f1": 0.8790378006872852,
+            "fold": 4,
+            "precision": 0.9221341023792358,
+            "recall": 0.8397898883782009,
+            "support": 1523
+          },
+          {
+            "class": "religion",
+            "f1": 0.9415384615384615,
+            "fold": 4,
+            "precision": 0.9244712990936556,
+            "recall": 0.9592476489028213,
+            "support": 1595
+          },
+          {
+            "class": "other_cyberbullying",
+            "f1": 0.6873545384018619,
+            "fold": 4,
+            "precision": 0.6467153284671533,
+            "recall": 0.7334437086092715,
+            "support": 1208
+          },
+          {
+            "class": "not_cyberbullying",
+            "f1": 0.6296610169491526,
+            "fold": 4,
+            "precision": 0.6773017319963537,
+            "recall": 0.5882818685669042,
+            "support": 1263
+          }
+        ],
+        "summary": {
+          "accuracy_mean": 0.8649458071876782,
+          "balanced_accuracy_mean": 0.851135289323718,
+          "macro_f1_mean": 0.8501455732910839,
+          "macro_f1_std": 0.004354620415466097,
+          "mcc_mean": 0.8380180116927509,
+          "runtime_seconds": 22.57333633408416
+        }
+      }
+    },
+    "selected_preprocessing_candidate": "p1__linear_svm_c1",
+    "selected_representation_candidate": "combined__logistic_regression_c1"
+  },
+  "solution": "Use P1 social-media-aware preprocessing and combined word/character TF-IDF, selected only from grouped folds 1\u20134.",
+  "title": "Text cleaning and representation comparison"
+}

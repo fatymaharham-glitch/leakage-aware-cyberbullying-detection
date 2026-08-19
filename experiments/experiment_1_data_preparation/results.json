@@ -1,0 +1,135 @@
+{
+  "choices_tried": [
+    "missing, empty-text, and six-label validation",
+    "exact duplicate and conflicting-label removal",
+    "character-five-gram near-duplicate groups at Jaccard 0.85",
+    "five stratified grouped folds with fold 0 protected"
+  ],
+  "experiment": 1,
+  "limitations": [
+    "Main Kaggle dataset redistribution licence/version remains unconfirmed, so raw and prepared text stay local and ignored.",
+    "This run validates the existing deterministic near-duplicate assignments; rebuilding MinHash groups is intentionally outside the compact runner."
+  ],
+  "metadata": {
+    "class_order": [
+      "age",
+      "ethnicity",
+      "gender",
+      "religion",
+      "other_cyberbullying",
+      "not_cyberbullying"
+    ],
+    "development_folds": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "evidence_source": "fresh_reproduction",
+    "final_test_fold": 0,
+    "fold_assignments_sha256": "406f240c9adbbec0a4fa95bade2ba8b3ffbf3432cb8fb1e83c3b918347349dd4",
+    "input_sha256": "f203129d7c5f761471ab084cd6acac1b16f2039182e1d654a25290b7681af907",
+    "random_seed": 42,
+    "versions": {
+      "joblib": "1.5.3",
+      "numpy": "2.5.1",
+      "pandas": "3.0.3",
+      "python": "3.12.13",
+      "scikit-learn": "1.9.0",
+      "scipy": "1.18.0",
+      "sentence-transformers": "5.6.0",
+      "xgboost": "3.3.0"
+    }
+  },
+  "question": "Is the dataset valid, and can similar tweets be kept together?",
+  "results": {
+    "duplicate_audit": {
+      "conflicting_label_groups": 1635,
+      "conflicting_label_rows": 3525,
+      "full_duplicate_rows_beyond_first": 36,
+      "full_duplicate_rows_involved": 72,
+      "same_text_same_label_groups": 210,
+      "same_text_same_label_rows_beyond_canonical": 588,
+      "same_text_same_label_rows_involved": 798
+    },
+    "folds": {
+      "class_counts": {
+        "0": {
+          "age": 1593,
+          "ethnicity": 1584,
+          "gender": 1523,
+          "not_cyberbullying": 1263,
+          "other_cyberbullying": 1208,
+          "religion": 1595
+        },
+        "1": {
+          "age": 1592,
+          "ethnicity": 1584,
+          "gender": 1522,
+          "not_cyberbullying": 1262,
+          "other_cyberbullying": 1209,
+          "religion": 1596
+        },
+        "2": {
+          "age": 1592,
+          "ethnicity": 1584,
+          "gender": 1522,
+          "not_cyberbullying": 1263,
+          "other_cyberbullying": 1209,
+          "religion": 1595
+        },
+        "3": {
+          "age": 1593,
+          "ethnicity": 1584,
+          "gender": 1522,
+          "not_cyberbullying": 1263,
+          "other_cyberbullying": 1208,
+          "religion": 1595
+        },
+        "4": {
+          "age": 1592,
+          "ethnicity": 1584,
+          "gender": 1523,
+          "not_cyberbullying": 1263,
+          "other_cyberbullying": 1208,
+          "religion": 1595
+        }
+      },
+      "near_duplicate_groups_crossing_folds": 0,
+      "protected_final_fold": 0,
+      "row_counts": {
+        "0": 8766,
+        "1": 8765,
+        "2": 8765,
+        "3": 8765,
+        "4": 8765
+      }
+    },
+    "prepared": {
+      "classes": {
+        "age": 7962,
+        "ethnicity": 7920,
+        "gender": 7612,
+        "not_cyberbullying": 6314,
+        "other_cyberbullying": 6042,
+        "religion": 7976
+      },
+      "multi_row_near_duplicate_groups": 257,
+      "near_duplicate_groups": 43462,
+      "removed_from_raw": 3866,
+      "rows": 43826,
+      "rows_in_multi_row_groups": 621
+    },
+    "raw": {
+      "empty_text_rows": 0,
+      "invalid_labels": [],
+      "missing_values": {
+        "cyberbullying_type": 0,
+        "tweet_text": 0
+      },
+      "rows": 47692
+    }
+  },
+  "solution": "Preserve raw text, exclude invalid/conflicting duplicate records, keep one canonical exact duplicate, and keep every near-duplicate group in one fold.",
+  "title": "Data preparation and leakage safeguards"
+}

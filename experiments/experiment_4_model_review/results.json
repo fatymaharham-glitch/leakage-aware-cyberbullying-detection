@@ -1,0 +1,824 @@
+{
+  "choices_tried": {
+    "finalists": [
+      "primary_logistic_regression",
+      "backup_linear_svm"
+    ],
+    "outside_dataset": "Davidson hate/offensive-language Twitter data",
+    "referral_thresholds": [
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.7
+    ],
+    "review": [
+      "paired bootstrap",
+      "masked coefficients",
+      "neutral identity probes",
+      "aggregate error pairs"
+    ],
+    "robustness_changes": [
+      "clean",
+      "remove_punctuation",
+      "normalize_repeats",
+      "leetspeak",
+      "partial_masking"
+    ]
+  },
+  "experiment": 4,
+  "limitations": [
+    "External labels are mapped only to harmful/not harmful and cannot validate the six-class task.",
+    "Identity probes are small sensitivity diagnostics, not a fairness audit.",
+    "Aggregate errors avoid redistributing raw tweets; optional human qualitative coding was not performed.",
+    "Linear coefficients describe model associations, not causal explanations."
+  ],
+  "metadata": {
+    "class_order": [
+      "age",
+      "ethnicity",
+      "gender",
+      "religion",
+      "other_cyberbullying",
+      "not_cyberbullying"
+    ],
+    "development_folds": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "evidence_source": "fresh_reproduction",
+    "final_test_fold": 0,
+    "fold_assignments_sha256": "406f240c9adbbec0a4fa95bade2ba8b3ffbf3432cb8fb1e83c3b918347349dd4",
+    "input_sha256": "f203129d7c5f761471ab084cd6acac1b16f2039182e1d654a25290b7681af907",
+    "random_seed": 42,
+    "versions": {
+      "joblib": "1.5.3",
+      "numpy": "2.5.1",
+      "pandas": "3.0.3",
+      "python": "3.12.13",
+      "scikit-learn": "1.9.0",
+      "scipy": "1.18.0",
+      "sentence-transformers": "5.6.0",
+      "xgboost": "3.3.0"
+    }
+  },
+  "question": "Where do both finalists fail, and how should uncertain predictions be handled?",
+  "results": {
+    "aggregate_errors": {
+      "backup_linear_svm": [
+        {
+          "count": 1061,
+          "predicted": "other_cyberbullying",
+          "true": "not_cyberbullying"
+        },
+        {
+          "count": 761,
+          "predicted": "not_cyberbullying",
+          "true": "other_cyberbullying"
+        },
+        {
+          "count": 385,
+          "predicted": "not_cyberbullying",
+          "true": "gender"
+        },
+        {
+          "count": 338,
+          "predicted": "other_cyberbullying",
+          "true": "gender"
+        },
+        {
+          "count": 238,
+          "predicted": "gender",
+          "true": "not_cyberbullying"
+        },
+        {
+          "count": 234,
+          "predicted": "religion",
+          "true": "not_cyberbullying"
+        },
+        {
+          "count": 228,
+          "predicted": "gender",
+          "true": "other_cyberbullying"
+        },
+        {
+          "count": 173,
+          "predicted": "age",
+          "true": "not_cyberbullying"
+        },
+        {
+          "count": 147,
+          "predicted": "not_cyberbullying",
+          "true": "religion"
+        },
+        {
+          "count": 80,
+          "predicted": "age",
+          "true": "other_cyberbullying"
+        },
+        {
+          "count": 68,
+          "predicted": "other_cyberbullying",
+          "true": "religion"
+        },
+        {
+          "count": 55,
+          "predicted": "ethnicity",
+          "true": "not_cyberbullying"
+        },
+        {
+          "count": 50,
+          "predicted": "not_cyberbullying",
+          "true": "age"
+        },
+        {
+          "count": 49,
+          "predicted": "other_cyberbullying",
+          "true": "age"
+        },
+        {
+          "count": 48,
+          "predicted": "ethnicity",
+          "true": "other_cyberbullying"
+        },
+        {
+          "count": 38,
+          "predicted": "other_cyberbullying",
+          "true": "ethnicity"
+        },
+        {
+          "count": 29,
+          "predicted": "not_cyberbullying",
+          "true": "ethnicity"
+        },
+        {
+          "count": 24,
+          "predicted": "religion",
+          "true": "other_cyberbullying"
+        },
+        {
+          "count": 20,
+          "predicted": "religion",
+          "true": "gender"
+        },
+        {
+          "count": 20,
+          "predicted": "gender",
+          "true": "religion"
+        },
+        {
+          "count": 19,
+          "predicted": "ethnicity",
+          "true": "gender"
+        },
+        {
+          "count": 14,
+          "predicted": "age",
+          "true": "gender"
+        },
+        {
+          "count": 8,
+          "predicted": "gender",
+          "true": "ethnicity"
+        },
+        {
+          "count": 8,
+          "predicted": "religion",
+          "true": "ethnicity"
+        },
+        {
+          "count": 6,
+          "predicted": "age",
+          "true": "ethnicity"
+        },
+        {
+          "count": 6,
+          "predicted": "ethnicity",
+          "true": "religion"
+        },
+        {
+          "count": 5,
+          "predicted": "gender",
+          "true": "age"
+        },
+        {
+          "count": 4,
+          "predicted": "ethnicity",
+          "true": "age"
+        },
+        {
+          "count": 4,
+          "predicted": "age",
+          "true": "religion"
+        },
+        {
+          "count": 3,
+          "predicted": "religion",
+          "true": "age"
+        }
+      ],
+      "primary_logistic_regression": [
+        {
+          "count": 1103,
+          "predicted": "other_cyberbullying",
+          "true": "not_cyberbullying"
+        },
+        {
+          "count": 742,
+          "predicted": "not_cyberbullying",
+          "true": "other_cyberbullying"
+        },
+        {
+          "count": 457,
+          "predicted": "not_cyberbullying",
+          "true": "gender"
+        },
+        {
+          "count": 416,
+          "predicted": "other_cyberbullying",
+          "true": "gender"
+        },
+        {
+          "count": 195,
+          "predicted": "religion",
+          "true": "not_cyberbullying"
+        },
+        {
+          "count": 189,
+          "predicted": "not_cyberbullying",
+          "true": "religion"
+        },
+        {
+          "count": 186,
+          "predicted": "gender",
+          "true": "not_cyberbullying"
+        },
+        {
+          "count": 184,
+          "predicted": "gender",
+          "true": "other_cyberbullying"
+        },
+        {
+          "count": 138,
+          "predicted": "age",
+          "true": "not_cyberbullying"
+        },
+        {
+          "count": 80,
+          "predicted": "other_cyberbullying",
+          "true": "religion"
+        },
+        {
+          "count": 75,
+          "predicted": "not_cyberbullying",
+          "true": "age"
+        },
+        {
+          "count": 59,
+          "predicted": "other_cyberbullying",
+          "true": "ethnicity"
+        },
+        {
+          "count": 57,
+          "predicted": "age",
+          "true": "other_cyberbullying"
+        },
+        {
+          "count": 54,
+          "predicted": "other_cyberbullying",
+          "true": "age"
+        },
+        {
+          "count": 33,
+          "predicted": "ethnicity",
+          "true": "not_cyberbullying"
+        },
+        {
+          "count": 31,
+          "predicted": "not_cyberbullying",
+          "true": "ethnicity"
+        },
+        {
+          "count": 23,
+          "predicted": "religion",
+          "true": "other_cyberbullying"
+        },
+        {
+          "count": 22,
+          "predicted": "ethnicity",
+          "true": "other_cyberbullying"
+        },
+        {
+          "count": 21,
+          "predicted": "religion",
+          "true": "gender"
+        },
+        {
+          "count": 18,
+          "predicted": "gender",
+          "true": "religion"
+        },
+        {
+          "count": 10,
+          "predicted": "age",
+          "true": "gender"
+        },
+        {
+          "count": 8,
+          "predicted": "religion",
+          "true": "ethnicity"
+        },
+        {
+          "count": 8,
+          "predicted": "ethnicity",
+          "true": "gender"
+        },
+        {
+          "count": 6,
+          "predicted": "age",
+          "true": "ethnicity"
+        },
+        {
+          "count": 5,
+          "predicted": "gender",
+          "true": "age"
+        },
+        {
+          "count": 4,
+          "predicted": "religion",
+          "true": "age"
+        },
+        {
+          "count": 4,
+          "predicted": "gender",
+          "true": "ethnicity"
+        },
+        {
+          "count": 4,
+          "predicted": "age",
+          "true": "religion"
+        },
+        {
+          "count": 3,
+          "predicted": "ethnicity",
+          "true": "age"
+        },
+        {
+          "count": 3,
+          "predicted": "ethnicity",
+          "true": "religion"
+        }
+      ]
+    },
+    "bootstrap_primary_minus_backup": {
+      "difference": 0.0013067114294280646,
+      "high": 0.003372791281984666,
+      "low": -0.0006835917390384971,
+      "samples": 1000,
+      "seed": 42,
+      "unit": "out-of-fold row"
+    },
+    "confidence": {
+      "curve": [
+        {
+          "accuracy_when_kept": 0.887491708245609,
+          "coverage": 0.9889617798060468,
+          "macro_f1_when_kept": 0.8750154588037035,
+          "referred_rate": 0.011038220193953223,
+          "threshold": 0.35
+        },
+        {
+          "accuracy_when_kept": 0.8954137060308884,
+          "coverage": 0.9714204221334855,
+          "macro_f1_when_kept": 0.8816266278959501,
+          "referred_rate": 0.028579577866514546,
+          "threshold": 0.4
+        },
+        {
+          "accuracy_when_kept": 0.9067399776441799,
+          "coverage": 0.944124358243012,
+          "macro_f1_when_kept": 0.8906841204593307,
+          "referred_rate": 0.05587564175698802,
+          "threshold": 0.45
+        },
+        {
+          "accuracy_when_kept": 0.9218072061875118,
+          "coverage": 0.90718767826583,
+          "macro_f1_when_kept": 0.9031740560273356,
+          "referred_rate": 0.09281232173416999,
+          "threshold": 0.5
+        },
+        {
+          "accuracy_when_kept": 0.935785536159601,
+          "coverage": 0.8692527096406161,
+          "macro_f1_when_kept": 0.9148937547778586,
+          "referred_rate": 0.1307472903593839,
+          "threshold": 0.55
+        },
+        {
+          "accuracy_when_kept": 0.9486669182994201,
+          "coverage": 0.8312321734169994,
+          "macro_f1_when_kept": 0.926358802741671,
+          "referred_rate": 0.16876782658300057,
+          "threshold": 0.6
+        },
+        {
+          "accuracy_when_kept": 0.9671655294605497,
+          "coverage": 0.7566172276098118,
+          "macro_f1_when_kept": 0.9425857037224961,
+          "referred_rate": 0.24338277239018824,
+          "threshold": 0.7
+        }
+      ],
+      "expected_calibration_error": 0.05030506452751955,
+      "mean_confidence": 0.8316686947423036,
+      "selected_threshold": 0.45
+    },
+    "external": {
+      "backup_linear_svm": {
+        "accuracy": 0.8107573740063754,
+        "binary_macro_f1": 0.6848407346384673,
+        "confusion_matrix_false_true": [
+          [
+            2214,
+            1949
+          ],
+          [
+            2741,
+            17879
+          ]
+        ],
+        "false_positive_rate": 0.4681719913523901,
+        "harmful_precision": 0.9017046600766593,
+        "harmful_recall": 0.867070805043647,
+        "rows": 24783
+      },
+      "primary_logistic_regression": {
+        "accuracy": 0.799055804382036,
+        "binary_macro_f1": 0.6794871621742344,
+        "confusion_matrix_false_true": [
+          [
+            2333,
+            1830
+          ],
+          [
+            3150,
+            17470
+          ]
+        ],
+        "false_positive_rate": 0.4395868364160461,
+        "harmful_precision": 0.9051813471502591,
+        "harmful_recall": 0.8472356935014549,
+        "rows": 24783
+      }
+    },
+    "identity_probes": [
+      {
+        "category": "age",
+        "confidence": 0.5658528085821336,
+        "model": "primary_logistic_regression",
+        "prediction": "other_cyberbullying",
+        "term": "young"
+      },
+      {
+        "category": "age",
+        "confidence": 0.7106807207166562,
+        "model": "primary_logistic_regression",
+        "prediction": "other_cyberbullying",
+        "term": "old"
+      },
+      {
+        "category": "ethnicity",
+        "confidence": 0.6289166234484143,
+        "model": "primary_logistic_regression",
+        "prediction": "other_cyberbullying",
+        "term": "Asian"
+      },
+      {
+        "category": "ethnicity",
+        "confidence": 0.5095816536564984,
+        "model": "primary_logistic_regression",
+        "prediction": "other_cyberbullying",
+        "term": "European"
+      },
+      {
+        "category": "gender",
+        "confidence": 0.49018785004097076,
+        "model": "primary_logistic_regression",
+        "prediction": "other_cyberbullying",
+        "term": "woman"
+      },
+      {
+        "category": "gender",
+        "confidence": 0.6446238922079841,
+        "model": "primary_logistic_regression",
+        "prediction": "other_cyberbullying",
+        "term": "man"
+      },
+      {
+        "category": "religion",
+        "confidence": 0.9680250820801313,
+        "model": "primary_logistic_regression",
+        "prediction": "religion",
+        "term": "Muslim"
+      },
+      {
+        "category": "religion",
+        "confidence": 0.9241986653858042,
+        "model": "primary_logistic_regression",
+        "prediction": "religion",
+        "term": "Christian"
+      },
+      {
+        "category": "age",
+        "confidence": 0.3363590371841583,
+        "model": "backup_linear_svm",
+        "prediction": "other_cyberbullying",
+        "term": "young"
+      },
+      {
+        "category": "age",
+        "confidence": 0.40544626146276624,
+        "model": "backup_linear_svm",
+        "prediction": "other_cyberbullying",
+        "term": "old"
+      },
+      {
+        "category": "ethnicity",
+        "confidence": 0.34904235476255585,
+        "model": "backup_linear_svm",
+        "prediction": "other_cyberbullying",
+        "term": "Asian"
+      },
+      {
+        "category": "ethnicity",
+        "confidence": 0.31578858393391235,
+        "model": "backup_linear_svm",
+        "prediction": "other_cyberbullying",
+        "term": "European"
+      },
+      {
+        "category": "gender",
+        "confidence": 0.3142316007690916,
+        "model": "backup_linear_svm",
+        "prediction": "other_cyberbullying",
+        "term": "woman"
+      },
+      {
+        "category": "gender",
+        "confidence": 0.3799643049585348,
+        "model": "backup_linear_svm",
+        "prediction": "other_cyberbullying",
+        "term": "man"
+      },
+      {
+        "category": "religion",
+        "confidence": 0.8756051974737359,
+        "model": "backup_linear_svm",
+        "prediction": "religion",
+        "term": "Muslim"
+      },
+      {
+        "category": "religion",
+        "confidence": 0.7250493077915008,
+        "model": "backup_linear_svm",
+        "prediction": "religion",
+        "term": "Christian"
+      }
+    ],
+    "masked_explanations": [
+      {
+        "class": "age",
+        "coefficient": 6.75455785564896,
+        "masked_feature": "word__s*****",
+        "rank": 1
+      },
+      {
+        "class": "age",
+        "coefficient": 4.1827549089358955,
+        "masked_feature": "word__b******",
+        "rank": 2
+      },
+      {
+        "class": "age",
+        "coefficient": 4.064925228114953,
+        "masked_feature": "word__h***",
+        "rank": 3
+      },
+      {
+        "class": "age",
+        "coefficient": 3.9419756161353705,
+        "masked_feature": "word__b****",
+        "rank": 4
+      },
+      {
+        "class": "age",
+        "coefficient": 3.8051626754394015,
+        "masked_feature": "word__s***********",
+        "rank": 5
+      },
+      {
+        "class": "ethnicity",
+        "coefficient": 5.473091717942173,
+        "masked_feature": "word__d***",
+        "rank": 1
+      },
+      {
+        "class": "ethnicity",
+        "coefficient": 5.433414577809184,
+        "masked_feature": "word__u**",
+        "rank": 2
+      },
+      {
+        "class": "ethnicity",
+        "coefficient": 4.734377622991428,
+        "masked_feature": "word__n*****",
+        "rank": 3
+      },
+      {
+        "class": "ethnicity",
+        "coefficient": 4.209240250820409,
+        "masked_feature": "character__n**",
+        "rank": 4
+      },
+      {
+        "class": "ethnicity",
+        "coefficient": 4.051551473310018,
+        "masked_feature": "character__n***",
+        "rank": 5
+      },
+      {
+        "class": "gender",
+        "coefficient": 6.7368829286757,
+        "masked_feature": "word__r***",
+        "rank": 1
+      },
+      {
+        "class": "gender",
+        "coefficient": 6.1538442422402335,
+        "masked_feature": "word__g**",
+        "rank": 2
+      },
+      {
+        "class": "gender",
+        "coefficient": 3.944651890317225,
+        "masked_feature": "word__j****",
+        "rank": 3
+      },
+      {
+        "class": "gender",
+        "coefficient": 3.569113377746857,
+        "masked_feature": "character__g**",
+        "rank": 4
+      },
+      {
+        "class": "gender",
+        "coefficient": 3.339111361607686,
+        "masked_feature": "character__f**",
+        "rank": 5
+      },
+      {
+        "class": "not_cyberbullying",
+        "coefficient": 2.9420884995895533,
+        "masked_feature": "word__b*******",
+        "rank": 1
+      },
+      {
+        "class": "not_cyberbullying",
+        "coefficient": 2.4163149435613804,
+        "masked_feature": "word__h**********",
+        "rank": 2
+      },
+      {
+        "class": "not_cyberbullying",
+        "coefficient": 1.8467394038954987,
+        "masked_feature": "word__b****",
+        "rank": 3
+      },
+      {
+        "class": "not_cyberbullying",
+        "coefficient": 1.6029822428757547,
+        "masked_feature": "word__b******",
+        "rank": 4
+      },
+      {
+        "class": "not_cyberbullying",
+        "coefficient": 1.48639772637259,
+        "masked_feature": "word__k******",
+        "rank": 5
+      },
+      {
+        "class": "other_cyberbullying",
+        "coefficient": 2.3615679585039318,
+        "masked_feature": "character__ **",
+        "rank": 1
+      },
+      {
+        "class": "other_cyberbullying",
+        "coefficient": 1.826902721219506,
+        "masked_feature": "character__ **",
+        "rank": 2
+      },
+      {
+        "class": "other_cyberbullying",
+        "coefficient": 1.8094342683784816,
+        "masked_feature": "character__ ***",
+        "rank": 3
+      },
+      {
+        "class": "other_cyberbullying",
+        "coefficient": 1.8000037592891518,
+        "masked_feature": "word__b**********",
+        "rank": 4
+      },
+      {
+        "class": "other_cyberbullying",
+        "coefficient": 1.752710368465164,
+        "masked_feature": "character__:**",
+        "rank": 5
+      },
+      {
+        "class": "religion",
+        "coefficient": 4.42974266878518,
+        "masked_feature": "word__m*****",
+        "rank": 1
+      },
+      {
+        "class": "religion",
+        "coefficient": 3.882428096637427,
+        "masked_feature": "word__c**************",
+        "rank": 2
+      },
+      {
+        "class": "religion",
+        "coefficient": 3.8392469028075373,
+        "masked_feature": "word__c********",
+        "rank": 3
+      },
+      {
+        "class": "religion",
+        "coefficient": 3.6671528011399066,
+        "masked_feature": "word__m******",
+        "rank": 4
+      },
+      {
+        "class": "religion",
+        "coefficient": 3.2749176727756857,
+        "masked_feature": "character__m***",
+        "rank": 5
+      }
+    ],
+    "robustness": {
+      "backup_linear_svm": {
+        "clean": {
+          "macro_f1": 0.8689709521936272,
+          "retention": 1.0
+        },
+        "leetspeak": {
+          "macro_f1": 0.3442382497149313,
+          "retention": 0.3961447144417629
+        },
+        "normalize_repeats": {
+          "macro_f1": 0.8677636635290602,
+          "retention": 0.9986106685597266
+        },
+        "partial_masking": {
+          "macro_f1": 0.5273131655100088,
+          "retention": 0.6068248474576294
+        },
+        "remove_punctuation": {
+          "macro_f1": 0.8501296838590257,
+          "retention": 0.9783177236396238
+        }
+      },
+      "primary_logistic_regression": {
+        "clean": {
+          "macro_f1": 0.8702776636230553,
+          "retention": 1.0
+        },
+        "leetspeak": {
+          "macro_f1": 0.33339870206522965,
+          "retention": 0.3830946328982599
+        },
+        "normalize_repeats": {
+          "macro_f1": 0.8700021201575372,
+          "retention": 0.999683384421966
+        },
+        "partial_masking": {
+          "macro_f1": 0.5157584674418955,
+          "retention": 0.5926366825212313
+        },
+        "remove_punctuation": {
+          "macro_f1": 0.8519816923285255,
+          "retention": 0.9789768575487027
+        }
+      }
+    }
+  },
+  "solution": "Use the simpler probabilistic primary with a 0.45 referral threshold, retain the backup for comparison, and require human review because transfer and obfuscation failures remain substantial.",
+  "title": "Robustness and model review"
+}

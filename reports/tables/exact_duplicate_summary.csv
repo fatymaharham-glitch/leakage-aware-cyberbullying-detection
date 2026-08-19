@@ -1,8 +1,0 @@
-metric,count
-conflicting_label_groups,1635
-conflicting_label_rows,3525
-full_duplicate_rows_beyond_first,36
-full_duplicate_rows_involved,72
-same_text_same_label_groups,210
-same_text_same_label_rows_beyond_canonical,588
-same_text_same_label_rows_involved,798

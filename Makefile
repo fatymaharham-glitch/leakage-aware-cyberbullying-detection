@@ -1,53 +1,28 @@
 PYTHON := .venv/bin/python
-RAW_INPUT ?= data/raw/cyberbullying_tweets.csv
-PROCESSED_INPUT ?= data/processed/experiment_ready.csv
 
-.PHONY: install audit eda prepare splits verify-splits baseline representations classifiers contextual imbalance leakage-gap candidates test lint
+.PHONY: install experiment-1 experiment-2 experiment-3 experiment-4 experiment-5 all demo
 
 install:
 	python3.12 -m venv .venv
 	$(PYTHON) -m pip install --upgrade pip
 	$(PYTHON) -m pip install -r requirements.txt
-	$(PYTHON) -m pip install -r requirements-dev.txt
 
-audit:
-	$(PYTHON) scripts/run_data_audit.py --input "$(RAW_INPUT)"
+experiment-1:
+	$(PYTHON) -m experiments.experiment_1_data_preparation.run
 
-eda:
-	$(PYTHON) scripts/run_eda.py --input "$(RAW_INPUT)"
+experiment-2:
+	$(PYTHON) -m experiments.experiment_2_text_comparison.run
 
-prepare:
-	$(PYTHON) scripts/prepare_dataset.py --input "$(RAW_INPUT)" --output "$(PROCESSED_INPUT)"
+experiment-3:
+	$(PYTHON) -m experiments.experiment_3_model_comparison.run
 
-splits:
-	$(PYTHON) scripts/build_splits.py --input "$(PROCESSED_INPUT)"
+experiment-4:
+	$(PYTHON) -m experiments.experiment_4_model_review.run
 
-verify-splits:
-	$(PYTHON) scripts/verify_frozen_splits.py --input "$(PROCESSED_INPUT)"
+experiment-5:
+	$(PYTHON) -m experiments.experiment_5_final_evaluation.run
 
-baseline:
-	$(PYTHON) scripts/run_tfidf_baseline.py --overwrite
+all: experiment-1 experiment-2 experiment-3 experiment-4 experiment-5
 
-representations:
-	$(PYTHON) scripts/run_sparse_benchmark.py --config sparse_representation.yaml --overwrite
-
-classifiers:
-	$(PYTHON) scripts/run_sparse_benchmark.py --config classifier_benchmark.yaml --overwrite
-
-contextual:
-	HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 $(PYTHON) scripts/run_contextual_baseline.py --overwrite
-
-imbalance:
-	$(PYTHON) scripts/run_sparse_benchmark.py --config imbalance_analysis.yaml --overwrite
-
-leakage-gap:
-	$(PYTHON) scripts/run_leakage_gap.py --overwrite
-
-candidates:
-	$(PYTHON) scripts/run_candidate_selection.py --overwrite
-
-test:
-	$(PYTHON) -m pytest
-
-lint:
-	$(PYTHON) -m ruff check .
+demo:
+	$(PYTHON) -m uvicorn demo.app:app --host 127.0.0.1 --port 8000

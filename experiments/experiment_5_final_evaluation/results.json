@@ -1,0 +1,186 @@
+{
+  "access_history": [
+    {
+      "evaluated_at_utc": "2026-08-19T18:39:16.845737+00:00",
+      "kind": "first_access",
+      "selection_used_final_test": false
+    },
+    {
+      "evaluated_at_utc": "2026-08-19T21:50:03.073445+00:00",
+      "kind": "reproduction",
+      "selection_used_final_test": false
+    }
+  ],
+  "choices_tried": {
+    "features": "P1 combined word and character TF-IDF",
+    "human_review_threshold": 0.45,
+    "model": "balanced Logistic Regression C=1.0 (frozen before access)",
+    "protected_test_fold": 0,
+    "training_folds": [
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  "experiment": 5,
+  "limitations": [
+    "This is a tweet-level research prototype, not proof of intent, repetition, power imbalance, or real-world harm.",
+    "Later executions are reproductions of the first protected-fold access, not independent first evaluations."
+  ],
+  "metadata": {
+    "class_order": [
+      "age",
+      "ethnicity",
+      "gender",
+      "religion",
+      "other_cyberbullying",
+      "not_cyberbullying"
+    ],
+    "development_folds": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "evidence_source": "fresh_reproduction",
+    "final_test_fold": 0,
+    "fold_assignments_sha256": "406f240c9adbbec0a4fa95bade2ba8b3ffbf3432cb8fb1e83c3b918347349dd4",
+    "input_sha256": "f203129d7c5f761471ab084cd6acac1b16f2039182e1d654a25290b7681af907",
+    "random_seed": 42,
+    "versions": {
+      "joblib": "1.5.3",
+      "numpy": "2.5.1",
+      "pandas": "3.0.3",
+      "python": "3.12.13",
+      "scikit-learn": "1.9.0",
+      "scipy": "1.18.0",
+      "sentence-transformers": "5.6.0",
+      "xgboost": "3.3.0"
+    }
+  },
+  "question": "How does the frozen primary perform on data never used for selection?",
+  "results": {
+    "class_order": [
+      "age",
+      "ethnicity",
+      "gender",
+      "religion",
+      "other_cyberbullying",
+      "not_cyberbullying"
+    ],
+    "confidence_distribution": {
+      "maximum": 0.9999999618864875,
+      "median": 0.9346915230492112,
+      "minimum": 0.24489710806423426,
+      "q25": 0.7260058956565969,
+      "q75": 0.9886689852984111
+    },
+    "confusion_matrix": [
+      [
+        1559,
+        2,
+        1,
+        1,
+        15,
+        15
+      ],
+      [
+        2,
+        1559,
+        4,
+        2,
+        11,
+        6
+      ],
+      [
+        1,
+        1,
+        1318,
+        3,
+        91,
+        109
+      ],
+      [
+        0,
+        3,
+        3,
+        1527,
+        15,
+        47
+      ],
+      [
+        13,
+        4,
+        54,
+        8,
+        944,
+        185
+      ],
+      [
+        25,
+        7,
+        45,
+        42,
+        283,
+        861
+      ]
+    ],
+    "metrics": {
+      "accuracy": 0.8861510381017568,
+      "balanced_accuracy": 0.8748008292175893,
+      "macro_f1": 0.8744225273790248,
+      "mcc": 0.8633571806145711,
+      "mean_confidence": 0.8424957711347334,
+      "referral_threshold": 0.45,
+      "referred_rate": 0.04426192105863564,
+      "rows": 8766
+    },
+    "per_class": {
+      "age": {
+        "f1": 0.9765111180707798,
+        "precision": 0.974375,
+        "recall": 0.9786566227244193,
+        "support": 1593
+      },
+      "ethnicity": {
+        "f1": 0.9867088607594937,
+        "precision": 0.9892131979695431,
+        "recall": 0.9842171717171717,
+        "support": 1584
+      },
+      "gender": {
+        "f1": 0.8941655359565808,
+        "precision": 0.9249122807017544,
+        "recall": 0.8653972422849638,
+        "support": 1523
+      },
+      "not_cyberbullying": {
+        "f1": 0.6926790024135157,
+        "precision": 0.7040065412919051,
+        "recall": 0.6817102137767221,
+        "support": 1263
+      },
+      "other_cyberbullying": {
+        "f1": 0.7354888975457733,
+        "precision": 0.6946284032376747,
+        "recall": 0.7814569536423841,
+        "support": 1208
+      },
+      "religion": {
+        "f1": 0.9609817495280051,
+        "precision": 0.9646241313960834,
+        "recall": 0.9573667711598746,
+        "support": 1595
+      }
+    },
+    "prior_reproduction_absolute_differences": {
+      "accuracy": 0.0,
+      "balanced_accuracy": 0.0,
+      "macro_f1": 0.0,
+      "mcc": 0.0
+    }
+  },
+  "solution": "Fit the frozen primary once on all development folds, evaluate the exact protected fold-0 membership, record access history, and export that same pipeline.",
+  "title": "Protected final evaluation and model export"
+}

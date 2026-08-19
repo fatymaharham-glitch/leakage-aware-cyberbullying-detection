@@ -1,0 +1,61 @@
+{
+  "default_model": "logistic_regression",
+  "models": [
+    {
+      "confidence_kind": "probability",
+      "file": "naive_bayes.joblib",
+      "id": "naive_bayes",
+      "macro_f1": 0.7429693800590704,
+      "name": "Naive Bayes",
+      "note": "Fast baseline, but weakest overall score.",
+      "selected": false,
+      "sha256": "c30a0e429ccccded4563a4015dcd4c589486fb327080483772fe4de0bfb02837",
+      "size_mib": 7.71
+    },
+    {
+      "confidence_kind": "probability",
+      "file": "logistic_regression.joblib",
+      "id": "logistic_regression",
+      "macro_f1": 0.8702720818121882,
+      "name": "Logistic Regression",
+      "note": "Selected final model: strongest score and simple explanations.",
+      "referral_threshold": 0.45,
+      "selected": true,
+      "sha256": "9b394508b99f55f4456b977245ee765ef17b0a37837f32a7b03b421784c90352",
+      "size_mib": 6.26
+    },
+    {
+      "confidence_kind": "decision-score estimate",
+      "file": "linear_svm.joblib",
+      "id": "linear_svm",
+      "macro_f1": 0.8689624748875225,
+      "name": "Linear SVM",
+      "note": "Very close backup model; confidence is only an estimate.",
+      "selected": false,
+      "sha256": "921595cc028544b84e80acac13679771fe11938357dc60f945c7b5846e5437ac",
+      "size_mib": 5.81
+    },
+    {
+      "confidence_kind": "probability",
+      "file": "random_forest.joblib",
+      "id": "random_forest",
+      "macro_f1": 0.8431041396507328,
+      "name": "Random Forest",
+      "note": "Non-linear comparison; slower and weaker than the linear leaders.",
+      "selected": false,
+      "sha256": "f3aecaae872f9b3e8444f7fbaf9b5f98be0e9898c63846ec6cb181841bc6fb6d",
+      "size_mib": 7.55
+    },
+    {
+      "confidence_kind": "probability",
+      "file": "xgboost.joblib",
+      "id": "xgboost",
+      "macro_f1": 0.8647147020624404,
+      "name": "XGBoost",
+      "note": "Competitive boosted-tree comparison, but more complex than Logistic Regression.",
+      "selected": false,
+      "sha256": "c072a8d75cb8b2346136ce9328b805830cfd6c54babd1ee758d6184ec3ad1849",
+      "size_mib": 1.75
+    }
+  ]
+}

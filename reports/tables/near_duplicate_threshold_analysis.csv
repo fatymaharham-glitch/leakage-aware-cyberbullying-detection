@@ -1,4 +1,0 @@
-threshold,candidate_pair_count,accepted_pair_count,all_group_count,multi_row_group_count,rows_in_multi_row_groups
-0.8,1089,788,43258,370,938
-0.85,720,490,43462,257,621
-0.9,278,236,43653,129,302
